@@ -1,0 +1,92 @@
+/* Root wrapper - center card */
+.row.justify-content-center.mt-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;              /* same as Sign In */
+  background-color: #f5f5f5;     /* light neutral background */
+  font-family: 'Poppins', sans-serif;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Card styling */
+.col-md-6.p-4.card.shadow {
+  background-color: #fff;        /* white like Sign In */
+  padding: 30px;                 /* same padding as sign in card */
+  border: 1px solid #D4A017;    /* gold border like sign in */
+  border-radius: 15px;           /* rounded corners */
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;              /* match Sign In card width */
+  max-height: 90vh;
+  overflow-y: auto;              /* scroll if content is too tall */
+}
+
+/* Headings */
+.card h3.text-primary {
+  font-size: 28px;
+  font-weight: 900;
+  color: #5C3A21;
+  margin-bottom: 1rem;
+}
+
+/* Input fields */
+.card .form-control {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #D4A017;     /* same gold border */
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  color: #333333;
+  font-weight: 600;
+  outline: none;
+}
+
+.card .form-control::placeholder {
+  color: #8B5E3C;
+}
+
+/* File input label */
+.card label.text-primary {
+  align-self: flex-start;
+  font-weight: 600;
+  color: #5C3A21;
+  margin-bottom: 5px;
+}
+
+/* Submit button */
+.card .btn-outline-primary {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background-color: #D4A017;      /* gold like Sign In */
+  color: #FFFFFF;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 4px 4px #F8F1E5;
+  transition: 0.2s;
+}
+
+.card .btn-outline-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 #fff;
+}
+
+/* Messages */
+.text-success {
+  color: #28a745;
+  margin-bottom: 1rem;
+}
+
+.text-danger {
+  color: #dc3545;
+  margin-bottom: 1rem;
+}

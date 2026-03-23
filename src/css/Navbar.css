@@ -1,0 +1,115 @@
+/* --- Navbar Container --- */
+.navbar {
+    background-color: #8B5E3C !important; /* Lighter warm brown */
+    padding: 0.8rem 0 !important; /* Vertical breathing room */
+    border-bottom: 1px solid #f0e6db; /* Very faint bottom divider */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03); /* Soft shadow */
+    transition: all 0.3s ease;
+    z-index: 1000; /* sits on top */
+}
+
+/* --- Brand/Logo Styling --- */
+.navbar-brand {
+    font-family: 'Playfair Display', serif; /* Elegant Serif font */
+    color: #FFF8E7 !important; /* Cream for brand text */
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+/* --- Navigation Links --- */
+.nav-link {
+    color: #FFF8E7 !important; /* Cream for normal links */
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0 15px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Hover & Active State */
+.nav-link:hover,
+.nav-link.active {
+    color: #FFB74D !important; /* Amber/gold hover */
+}
+
+/* Active link underline */
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 20%;
+    width: 60%;
+    height: 2px;
+    background-color: #FFB74D; /* Match hover color */
+    border-radius: 2px;
+}
+
+/* --- Sign In Button --- */
+/* Original styling preserved */
+.btn-signin {
+    background-color: #5c3d2e !important; /* Match the brand brown */
+    color: #ffffff !important;
+    border-radius: 50px !important; /* Perfect pill shape */
+    padding: 8px 28px !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(92, 61, 46, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn-signin:hover {
+    background-color: #4a3125 !important; /* Darker on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+    box-shadow: 0 6px 15px rgba(92, 61, 46, 0.3);
+}
+
+.btn-signin:active {
+    transform: translateY(0);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-top: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .nav-link {
+        margin: 10px 0 !important;
+        padding: 12px 0;
+        border-bottom: 1px solid #f8f5f0;
+    }
+    
+    .nav-link.active::after {
+        display: none;
+    }
+}
+
+/* Toggler Button */
+.navbar-toggler {
+    border: 1px solid #FFB74D !important; /* Amber border */
+}
+
+.navbar-toggler-icon {
+    filter: invert(24%) sepia(14%) saturate(1458%) hue-rotate(331deg) brightness(95%) contrast(88%);
+}
+
+/* Remove focus ring */
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}

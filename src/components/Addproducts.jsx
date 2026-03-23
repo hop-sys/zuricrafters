@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Loader from './Loader';
 import axios from 'axios';
+import '../css/Addproducts.css';
 
 const Addproducts = () => {
 
@@ -65,7 +66,7 @@ const Addproducts = () => {
   return (
     <div className='row justify-content-center mt-4'>
       <div className='col-md-6 p-4 card shadow'>
-        <h3 className='text-primary'>Add Product</h3>
+        <h3 className='text-warning'>Add Product</h3>
 
         {/* bind the loading hook */}
         {loading && <Loader/>}
@@ -100,7 +101,7 @@ const Addproducts = () => {
 
           {/* {product_cost} */}
 
-          <label className='text-primary'>Craft photo</label>
+          <label className='text-warning'>Craft photo</label>
           <input type="file"
           className='form-control' 
           required

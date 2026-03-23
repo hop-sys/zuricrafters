@@ -7,14 +7,18 @@ import Addproducts from './components/Addproducts';
 import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayment';
 import Notfound from './components/Notfound';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Mycarousel from './components/Mycarousel';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <header className="App-header">
-          <h2>Welcome to Zuri Crafters - Where every piece of craft celebrates African creativity, tradition and modern style.</h2>
+           <Navbar />
       </header>
+      < Mycarousel />
       <Routes>
         <Route path='/' element={<Getproducts/>} />
         <Route path='/signup' element={<Signup/>} />
@@ -23,6 +27,7 @@ function App() {
         <Route path='/makepayment' element={<Makepayment/>} />
         <Route path='*' element={<Notfound />}/>
       </Routes>
+      <Footer />
     </div>
     </Router>
   );
