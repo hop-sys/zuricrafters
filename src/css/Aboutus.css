@@ -1,0 +1,63 @@
+.brand-brown { color: #5c3d2e; font-weight: 700; }
+.brand-gold { color: #b8860b; letter-spacing: 2px; font-weight: 600; font-size: 0.9rem; }
+
+.about-section {
+    background-color: #faf9f6; /* Soft parchment background */
+}
+
+/* Circular Image with Hover */
+.about-image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.luxury-circle-about {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid #ffffff;
+    box-shadow: 0 15px 35px rgba(92, 61, 46, 0.15);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.luxury-circle-about:hover {
+    transform: scale(1.05);
+}
+
+/* Floating Badge */
+.experience-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #5c3d2e;
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border: 2px solid #ffffff;
+}
+
+/* Features Icons */
+.feature-item {
+    text-align: center;
+}
+
+.feature-item i {
+    font-size: 1.5rem;
+    color: #b8860b;
+    display: block;
+}
+
+.feature-item p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5c3d2e;
+    text-transform: uppercase;
+}

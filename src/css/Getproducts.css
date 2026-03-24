@@ -32,3 +32,16 @@ body{
 .btn-buy:hover{
   background-color:#C96A3D;
 }
+.card-img-top {
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* This crops the image to fit without squishing it */
+    width: 100%;
+}
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Show exactly 3 lines */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    min-height: 4.5em; /* Ensure even short descriptions take up this much space */
+}

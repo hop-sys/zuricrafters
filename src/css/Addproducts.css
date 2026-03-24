@@ -24,7 +24,7 @@
   width: 100%;
   max-width: 400px;              /* match Sign In card width */
   max-height: 90vh;
-  overflow-y: auto;              /* scroll if content is too tall */
+  overflow-y: hidden;              /* scroll if content is too tall */
 }
 
 /* Headings */

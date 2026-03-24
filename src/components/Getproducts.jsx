@@ -1,8 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import Loader from './Loader';
 import { useNavigate } from 'react-router-dom';
 import '../css/Getproducts.css';
+import Mycarousel from './Mycarousel';
+import Aboutus from './Aboutus';
+import SearchBar from './SearchBar';
+import Footer from './Footer';
+import Products from './Products';
 
 const Getproducts = () => {
   // 1.Inititlize hooks to help you manage the state of your application
@@ -52,11 +58,13 @@ const Getproducts = () => {
 
   return (
     <div className='row'>
-      <h3 className="text-warning">Available products</h3>
+      < Mycarousel />
+      <SearchBar />
+      <Products /> {/* This might be the top row of cards in your screenshot */}
+      {/* <h3 className="text-warning"></h3> */}
 
         {loading && <Loader/> }
         <h4 className="text-danger">{error}</h4>
-
 
         {/* map the products fetched from the API to the UI */}
         {products.map((product) => (
@@ -80,6 +88,8 @@ const Getproducts = () => {
             </div>
           </div>
         ))}
+        <Aboutus />
+        <Footer />
     </div>
   )
 }

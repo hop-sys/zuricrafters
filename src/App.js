@@ -10,6 +10,9 @@ import Notfound from './components/Notfound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Mycarousel from './components/Mycarousel';
+import SearchBar from "./components/SearchBar";
+import Aboutus from './components/Aboutus';
+import Products from './components/Products';
 
 function App() {
   return (
@@ -18,7 +21,7 @@ function App() {
         <header className="App-header">
            <Navbar />
       </header>
-      < Mycarousel />
+    
       <Routes>
         <Route path='/' element={<Getproducts/>} />
         <Route path='/signup' element={<Signup/>} />
@@ -27,7 +30,6 @@ function App() {
         <Route path='/makepayment' element={<Makepayment/>} />
         <Route path='*' element={<Notfound />}/>
       </Routes>
-      <Footer />
     </div>
     </Router>
   );

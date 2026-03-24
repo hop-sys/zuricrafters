@@ -1,98 +1,126 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import '../css/Makepayment.css';
 
 const Makepayment = () => {
-    const { product } = useLocation().state || {};
+    const location = useLocation();
+    const { product } = location.state || {};
     const navigate = useNavigate();
-    const img_url = "https://hope.alwaysdata.net/static/images/"
+    const img_url = "https://hope.alwaysdata.net/static/images/";
 
     const [number, setNumber] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
+    // Handle case where product might be undefined
+    if (!product) {
+        return <div className="container mt-5 text-center">Product data not found. <button onClick={() => navigate('/')}>Go Back</button></div>;
+    }
+
     const handlesubmit = async (e) => {
-        e.preventDefault()
-        setLoading(true)
+        e.preventDefault();
+        setLoading(true);
+        setError("");
         try {
             const formdata = new FormData();
             formdata.append("phone", number);
             formdata.append("amount", product.product_cost);
 
-            const response = await axios.post("https://hope.alwaysdata.net/api/mpesa_payment", formdata)
+            const response = await axios.post("https://hope.alwaysdata.net/api/mpesa_payment", formdata);
             setLoading(false);
             setSuccess(response.data.message);
 
             setTimeout(() => {
-            setSuccess("");
-            }, 1000);
+                setSuccess("");
+            }, 3000);
 
         } catch (error) {
-            setLoading(false)
-            setError(error.message)
+            setLoading(false);
+            setError(error.response?.data?.message || error.message);
         }
-    }
+    };
 
     return (
-        <div className="container mt-3">
-            <div className='row justify-content-center'>
-                <div className="col-md-5 card shadow p-3">
-                    
-                    {/* Header Row: Back Button and Title inside the card */}
-                    <div className="d-flex justify-content-between align-items-center mb-2">
-                        <button 
-                            className="btn btn-warning btn-sm" 
-                            onClick={() => navigate("/")}
-                            style={{ padding: '4px 10px', fontSize: '12px', border: '1px solid #7b4b2a' }}>
-                            ← Back
-                        </button>
-                        <h2 className="text-success m-0" style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-                            Lipa na MPESA
-                        </h2>
-                    </div>
+        <div className="payment-page-wrapper">
+            <div className="container py-5">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10 col-xl-8">
+                        {/* Main Card Container */}
+                        <div className="payment-card shadow-sm rounded-4 overflow-hidden border-0">
+                            <div className="row g-0">
+                                
+                                {/* Left Side: Product Image */}
+                                <div className="col-md-6">
+                                    <div className="payment-image-container">
+                                        <img 
+                                            src={img_url + product.product_photo} 
+                                            alt={product.product_name} 
+                                            className="payment-product-img" 
+                                        />
+                                    </div>
+                                </div>
 
-                    {/* Product Image */}
-                    <img src={img_url + product.product_photo} alt="product" className='product_img' />
+                                {/* Right Side: Payment Logic */}
+                                <div className="col-md-6 p-4 p-lg-5 d-flex flex-column bg-white">
+                                    {/* Top Navigation */}
+                                    <div className="d-flex justify-content-between align-items-center mb-4">
+                                        <button 
+                                            className="btn btn-back" 
+                                            onClick={() => navigate("/")}>
+                                            ← Back
+                                        </button>
+                                        <span className="badge-best-seller">Best Seller</span>
+                                    </div>
 
-                    <div className="card-body p-1">
-                        <h2 className="text-info mt-1" style={{ fontSize: '1.1rem' }}> {product.product_name}</h2>
-                        
-                        <p className="text-dark mb-1" style={{ fontSize: '14px', lineHeight: '1.4' }}> 
-                            {product.product_description}
-                        </p>
+                                    {/* Product Details */}
+                                    <h2 className="payment-title">{product.product_name}</h2>
+                                    <h5 className="payment-subtitle">Handcrafted Artisanal Piece</h5>
+                                    
+                                    <p className="payment-desc my-3">
+                                        {product.product_description}
+                                    </p>
 
-                        <b className="text-warning d-block mb-2"> KES {product.product_cost}</b>
+                                    <h3 className="payment-price mb-4">
+                                        KES {Number(product.product_cost).toLocaleString()}
+                                    </h3>
 
-                        <form onSubmit={handlesubmit}>
-                            {loading && <Loader />}
-                            
-                            {/* Status Messages */}
-                            {success && <div className="text-success small mb-1">{success}</div>}
-                            {error && <div className="text-danger small mb-1">{error}</div>}
+                                    {/* M-Pesa Form */}
+                                    <form onSubmit={handlesubmit} className="mt-auto">
+                                        {loading && <Loader />}
+                                        
+                                        {success && <div className="text-success small mb-2 fw-bold">{success}</div>}
+                                        {error && <div className="text-danger small mb-2">{error}</div>}
 
-                            <input 
-                                type="tel"
-                                className='form-control mb-2'
-                                placeholder='254XXXXXXXXX'
-                                required 
-                                value={number}
-                                onChange={(e) => setNumber(e.target.value)}
-                            /> 
+                                        <div className="form-group mb-3">
+                                            <input 
+                                                type="tel"
+                                                className='form-control mpesa-input'
+                                                placeholder='254XXXXXXXXX'
+                                                required 
+                                                value={number}
+                                                onChange={(e) => setNumber(e.target.value)}
+                                            /> 
+                                        </div>
 
-                            <input 
-                                type="submit"
-                                value="Make Payment"
-                                className='btn btn-success w-100' 
-                            />
-                        </form>
+                                        <button 
+                                            type="submit" 
+                                            className='btn btn-mpesa w-100 py-2'>
+                                            Make Payment - KES {product.product_cost}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Footer text from mockup */}
+                        <p className="text-center mt-4 small design-tag">Designed in Nairobi, Kenya</p>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Makepayment;
