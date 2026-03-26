@@ -89,7 +89,6 @@ const Getproducts = () => {
           </div>
         ))}
         <Aboutus />
-        <Footer />
     </div>
   )
 }
