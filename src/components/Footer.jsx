@@ -1,111 +1,178 @@
+// src/components/Footer.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you use routing
+import { NavLink } from 'react-router-dom';
 import '../css/Footer.css';
 
 const Footer = () => {
-    const [email, setEmail] = useState("");
-    const [status, setStatus] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const handleSubscribe = (e) => {
-        e.preventDefault();
-        if(email.includes('@')){
-            setStatus("Karibu! You're in the Zuri Inner Circle.");
-            setEmail("");
-            // Add your AlwaysData API call here later
-            setTimeout(() => setStatus(""), 4000);
-        } else {
-            setStatus("Please enter a valid email address.");
-        }
-    };
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
 
-    return (
-        <footer className="zuri-footer py-5 mt-5">
-            <div className="container">
-                <div className="row justify-content-between g-5">
-                    
-                    {/* Column 1: Brand & Modern Sitemap */}
-                    <div className="col-lg-5 col-md-12 text-center text-lg-start">
-                        <div className="footer-brand mb-4">
-                            <h2 className="mb-2">Zuri Crafters</h2>
-                            <p className="text-cream small">Nairobi • Artisan Heritage • Since 2026</p>
-                        </div>
-                        
-                        <div className="row g-4 justify-content-center justify-content-lg-start">
-                            <div className="col-6 col-md-4">
-                                <h6 className="footer-heading">Collections</h6>
-                                <ul className="list-unstyled footer-links">
-                                    <li><Link to="/kiondo">Kiondo Totes</Link></li>
-                                    <li><Link to="/jewelry">Artisan Jewelry</Link></li>
-                                    <li><Link to="/beadwork">Maasai Beadwork</Link></li>
-                                </ul>
-                            </div>
-                            <div className="col-6 col-md-4">
-                                <h6 className="footer-heading">Zuri Studio</h6>
-                                <ul className="list-unstyled footer-links">
-                                    <li><Link to="#about">Our Story</Link></li>
-                                    <li><Link to="#contact">Contact Us</Link></li>
-                                    <li><Link to="/shipping">Shipping Policy</Link></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("message", message);
 
-                    {/* Column 2: The Unique Form & Connect */}
-                    <div className="col-lg-6 col-md-12 text-center text-lg-start">
-                        <div className="footer-signup-box p-4 p-lg-5 rounded-4">
-                            <h4 className="mb-3 text-cream">Join The Inner Circle</h4>
-                            <p className="small text-faded-cream mb-4">
-                                Be the first to know about exclusive new craft drops, 
-                                artisan stories, and intimate pop-up events in Nairobi.
-                            </p>
-                            
-                            <form onSubmit={handleSubscribe} className="footer-signup-form">
-                                {status && <p className="text-cream small mb-2">{status}</p>}
-                                <div className="d-flex flex-column flex-sm-row gap-2">
-                                    <input 
-                                        type="email" 
-                                        className="form-control zuri-input py-2 text-center text-sm-start" 
-                                        placeholder="Your email address..." 
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
-                                    <button type="submit" className="btn btn-primary zuri-signup-btn py-2 px-4 flex-shrink-0">
-                                        Subscribe
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+      const response = await fetch('http://127.0.0.1:5001/api/footer_form', {
+        method: 'POST',
+        body: formData,
+      });
 
-                        {/* Social Connectivity */}
-<div className="footer-socials mt-4 d-flex justify-content-center justify-content-lg-start gap-3">
-    <a href="https://instagram.com/zuricrafters" target="_blank" rel="noreferrer" className="social-icon-link">
-        <i className="bi bi-instagram"></i>
-    </a>
-    <a href="https://wa.me/254XXXXXXXXX" target="_blank" rel="noreferrer" className="social-icon-link">
-        <i className="bi bi-whatsapp"></i>
-    </a>
-    <a href="https://facebook.com/zuricrafters" target="_blank" rel="noreferrer" className="social-icon-link telegram-hover">
-        <i className="bi bi-telegram"></i>
-    </a>
-</div>
-                        
-                        <div className="mt-4 text-center text-lg-start">
-                            <div className="brand-details d-flex gap-4 justify-content-center justify-content-lg-start">
-                                <div className="detail-item"><i className="bi bi-geo-alt-fill me-1"></i> Studio • Nairobi, Kenya</div>
-                                <div className="detail-item"><i className="bi bi-patch-check-fill me-1"></i> Artisan Certified</div>
-                            </div>
-                        </div>
-                    </div>
+      const data = await response.json();
 
-                </div>
+      if (response.ok) {
+        setStatus("Message sent successfully");
+        setName("");
+        setEmail("");
+        setMessage("");
+      } else {
+        setStatus(data.error || "Something went wrong.");
+      }
+    } catch (error) {
+      setStatus("Server is offline. Try again later.");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setStatus(""), 5000);
+    }
+  };
+
+  return (
+    <footer className="zuri-footer py-5 mt-5">
+      <div className="container">
+        <div className="row justify-content-between g-5">
+
+          {/* Left side: logo + links */}
+          <div className="col-lg-5 col-md-12 text-center text-lg-start">
+            <div className="footer-brand mb-4">
+              <h2 className="mb-2">Zuri Crafters</h2>
+              <p className="text-cream small">Nairobi • Artisan Heritage • Since 2026</p>
             </div>
-            
-            <div className="container-fluid border-top mt-5 pt-4 text-center border-faded">
-                <p className="mb-0 small text-cream-faded">© 2026 Zuri Crafters. All rights reserved. Designed in Nairobi.</p>
+
+            <div className="row g-4 justify-content-center justify-content-lg-start">
+              {/* Collections */}
+              <div className="col-6 col-md-4">
+                <h6 className="footer-heading">Collections</h6>
+                <ul className="list-unstyled footer-links">
+                  <li>
+                    <NavLink to="/kiondo" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                      Kiondo Totes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/jewelry" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                      Artisan Jewelry
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/products" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                      Beadwork
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Zuri Studio */}
+              <div className="col-6 col-md-4">
+                <h6 className="footer-heading">Zuri Studio</h6>
+                <ul className="list-unstyled footer-links">
+                  <li>
+                    <NavLink to="/story" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                      Our Story
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/contact" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                      Contact Us
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/aboutus" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                      About Us
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </footer>
-    );
+          </div>
+
+          {/* Right side: newsletter form + social icons */}
+          <div className="col-lg-6 col-md-12 text-center text-lg-start">
+            <div className="footer-signup-box p-4 p-lg-5 rounded-4">
+              <h4 className="mb-3 text-cream">Join The Inner Circle</h4>
+              <p className="text-cream small mb-3">
+                Be the first to know about exclusive new craft drops, artisan stories, and intimate pop-up events in Nairobi.
+              </p>
+
+              <form onSubmit={handleSubscribe} className="footer-signup-form">
+                {status && <p className="text-cream small mb-2">{status}</p>}
+
+                <input
+                  type="text"
+                  className="form-control zuri-input py-2 mb-2"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  disabled={loading}
+                />
+
+                <input
+                  type="email"
+                  className="form-control zuri-input py-2 mb-2"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={loading}
+                />
+
+                <textarea
+                  className="form-control zuri-input py-2 mb-3"
+                  placeholder="Your message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                  disabled={loading}
+                ></textarea>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary zuri-signup-btn py-2 px-4"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Subscribe"}
+                </button>
+              </form>
+
+              <div className="d-flex mt-3 gap-3">
+                <i className="bi bi-instagram"></i>
+                <i className="bi bi-whatsapp"></i>
+                <i className="bi bi-telegram"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Bottom line */}
+        <div className="footer-bottom text-center mt-4 pt-4 border-top border-faded">
+          <div className="d-flex justify-content-center gap-4 mb-2">
+            <span className="brand-details detail-item">📍 Studio • Nairobi, Kenya</span>
+            <span className="brand-details detail-item">✔ Artisan Certified</span>
+          </div>
+          <p className="text-cream small mb-0">&copy; 2026 Zuri Crafters. All rights reserved. Designed in Nairobi.</p>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

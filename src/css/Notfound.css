@@ -1,4 +1,35 @@
-.Notfound{
-    font-size: 45px;
-    color: red;
+.notfound-wrapper {
+  height: 80vh;
+  background-color: #3E2723; /* deep brown */
+  color: #F5E4D7; /* cream text */
+  font-family: 'Poppins', sans-serif;
+  padding: 2rem;
+}
+
+.notfound-code {
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+.notfound-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.notfound-message {
+  font-size: 1.2rem;
+  max-width: 500px;
+}
+
+.notfound-btn {
+  background-color: #D2691E; /* chocolate accent */
+  border: none;
+  color: #F5E4D7;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notfound-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }

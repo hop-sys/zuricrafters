@@ -127,3 +127,9 @@
 .social-icon-link i {
     line-height: 0; /* Keeps icons perfectly centered */
 }
+/* Highlight active footer links */
+.footer-links li .active-link {
+  color: #ff7f50;   /* Zuri accent color */
+  font-weight: bold;
+  text-decoration: underline;
+}
