@@ -9,6 +9,7 @@ import Makepayment from './components/Makepayment';
 import Notfound from './components/Notfound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Ratings from './components/Ratings';
 // import Mycarousel from './components/Mycarousel';
 // import SearchBar from "./components/SearchBar";
 // import Aboutus from './components/Aboutus';
@@ -20,6 +21,7 @@ function App() {
       <div className="App">
         <header className="App-header">
            <Navbar />
+           {/* <Ratings/> */}
       </header>
     
       <Routes>
@@ -28,6 +30,7 @@ function App() {
         <Route path='/signin' element={<Signin />} />
         <Route path='/addproducts' element={<Addproducts/>} />
         <Route path='/makepayment' element={<Makepayment/>} />
+        <Route path='/ratings' element={<Ratings />}/>
         <Route path='*' element={<Notfound />}/>
       </Routes>
     </div>
