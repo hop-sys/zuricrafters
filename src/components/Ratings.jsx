@@ -28,6 +28,7 @@ const Ratings = ({ productId, userEmail }) => {
       return;
     }
     try {
+        // try
       const formData = new FormData();
       formData.append("product_id", productId);
       formData.append("user_email", userEmail);
