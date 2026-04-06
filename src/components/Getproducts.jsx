@@ -9,6 +9,7 @@ import Aboutus from './Aboutus';
 import SearchBar from './SearchBar';
 import Footer from './Footer';
 import Products from './Products';
+import WishlistButton from './WishlistButton';
 
 const Getproducts = () => {
   // 1.Inititlize hooks to help you manage the state of your application
@@ -70,6 +71,7 @@ const Getproducts = () => {
         {products.map((product) => (
           <div key={product.id} className="col-md-3 justify-content-center mb-3">
             <div className="card">
+              <WishlistButton  />
               
               <img 
               src={img_url + product.product_photo}

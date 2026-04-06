@@ -10,9 +10,10 @@ import Notfound from './components/Notfound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Ratings from './components/Ratings';
+import OurStory from './components/OurStory';
 // import Mycarousel from './components/Mycarousel';
 // import SearchBar from "./components/SearchBar";
-// import Aboutus from './components/Aboutus';
+import Aboutus from './components/Aboutus';
 // import Products from './components/Products';
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         <Route path='/makepayment' element={<Makepayment/>} />
         <Route path='/ratings' element={<Ratings />}/>
         <Route path='*' element={<Notfound />}/>
+        <Route path='/aboutus' element={<Aboutus />}/>
+        <Route path='/ourstory' element={<OurStory />}/>
       </Routes>
     </div>
      <Footer/>

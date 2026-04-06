@@ -20,7 +20,7 @@ const Footer = () => {
       formData.append("email", email);
       formData.append("message", message);
 
-      const response = await fetch('http://127.0.0.1:5001/api/footer_form', {
+      const response = await fetch('http://hope.alwaysdata.net/api/footer_form', {
         method: 'POST',
         body: formData,
       });
@@ -83,7 +83,7 @@ const Footer = () => {
                 <h6 className="footer-heading">Zuri Studio</h6>
                 <ul className="list-unstyled footer-links">
                   <li>
-                    <NavLink to="/story" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                    <NavLink to="/ourstory" className={({ isActive }) => isActive ? 'active-link' : ''}>
                       Our Story
                     </NavLink>
                   </li>
