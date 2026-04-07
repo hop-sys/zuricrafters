@@ -47,6 +47,9 @@ const Navbar = () => {
             <li className='nav-item'>
               <Link className='nav-link' to="/ratings">Rate us</Link>
             </li>
+            <li className='nav-item'>
+              <Link className='nav-link' to="/profile">Profile</Link>
+            </li>
           </ul>
 
           {/* SIGN IN BUTTON */}

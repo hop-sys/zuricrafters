@@ -62,10 +62,12 @@ const Products = () => {
                                             
                                             <button 
                                                 className="btn btn-zuri-card w-100"
-                                                onClick={() => navigate('/payment', { state: { product: item } })}
+                                                onClick={() => navigate('/makepayment', { state: { product: item } })}
                                             >
                                                 Purchase
                                             </button>
+                                            {/* <button className="btn btn-buy"  */}
+                                            {/* onClick={() => navigate("/makepayment", {state: {product}})}>Purchase Now</button> */}
                                         </div>
                                     </div>
                                 </div>

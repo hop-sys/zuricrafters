@@ -11,9 +11,11 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Ratings from './components/Ratings';
 import OurStory from './components/OurStory';
+// import ContactUs from './components/ContactUs';
 // import Mycarousel from './components/Mycarousel';
 // import SearchBar from "./components/SearchBar";
 import Aboutus from './components/Aboutus';
+import Profile from './components/Profile';
 // import Products from './components/Products';
 
 function App() {
@@ -32,9 +34,11 @@ function App() {
         <Route path='/addproducts' element={<Addproducts/>} />
         <Route path='/makepayment' element={<Makepayment/>} />
         <Route path='/ratings' element={<Ratings />}/>
+        <Route path='/profile' element={<Profile />} />
         <Route path='*' element={<Notfound />}/>
         <Route path='/aboutus' element={<Aboutus />}/>
         <Route path='/ourstory' element={<OurStory />}/>
+        {/* <Route path='/contacuUs' element={<ContactUs />}/> */}
       </Routes>
     </div>
      <Footer/>

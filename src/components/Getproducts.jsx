@@ -71,8 +71,6 @@ const Getproducts = () => {
         {products.map((product) => (
           <div key={product.id} className="col-md-3 justify-content-center mb-3">
             <div className="card">
-              <WishlistButton  />
-              
               <img 
               src={img_url + product.product_photo}
               className="product_img mt-3" 
