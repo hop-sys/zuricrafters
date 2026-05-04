@@ -5,6 +5,8 @@ const OurStory = () => {
   return (
     <div className="story-container">
       <header className="story-header">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1575286333978357"
+        crossorigin="anonymous"></script>
         <span className="subtitle">Nairobi • Since 2026</span>
         <h1>Our Story</h1>
       </header>
