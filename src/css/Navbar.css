@@ -53,8 +53,6 @@
     border-radius: 2px;
 }
 
-/* --- Sign In Button --- */
-/* Original styling preserved */
 .btn-signin {
     background-color: #5c3d2e !important; /* Match the brand brown */
     color: #ffffff !important;
@@ -91,7 +89,7 @@
     .nav-link {
         margin: 10px 0 !important;
         padding: 12px 0;
-        border-bottom: 1px solid #f8f5f0;
+        border-bottom: 1px solid #FFB74D;
     }
     
     .nav-link.active::after {
@@ -101,7 +99,7 @@
 
 /* Toggler Button */
 .navbar-toggler {
-    border: 1px solid #FFB74D !important; /* Amber border */
+    border: 1px solid #FFB74D !important; 
 }
 
 .navbar-toggler-icon {

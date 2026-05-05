@@ -9,7 +9,6 @@ import Aboutus from './Aboutus';
 import SearchBar from './SearchBar';
 import Footer from './Footer';
 import Products from './Products';
-import WishlistButton from './WishlistButton';
 
 const Getproducts = () => {
   // 1.Inititlize hooks to help you manage the state of your application
@@ -57,6 +56,34 @@ const Getproducts = () => {
 
   // console.log(products)
 
+  const addToCart = (product) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // 🔒 block non-logged users
+  if (!user) {
+    navigate("/signup");
+    return;
+  }
+
+  const cartKey = `cart_${user.email}`;
+
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+  // check if item already exists
+  const existingItem = cart.find(item => item.id === product.id);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  localStorage.setItem(cartKey, JSON.stringify(cart));
+
+  // 🔥 update navbar cart count instantly
+  window.dispatchEvent(new Event("storage"));
+};
+
   return (
     <div className='row'>
       < Mycarousel />
@@ -82,6 +109,13 @@ const Getproducts = () => {
                 <p className="card-text">{product.product_description.slice(0, 100)}...</p>
 
                 <h4 className="price">Ksh {product.product_cost}</h4>
+
+                <button 
+                  className="btn btn-outline-warning ms-2"
+                  onClick={() => addToCart(product)}
+                  >
+                  <i className="bi bi-cart"></i> Add to Cart
+                </button>
 
                 <button className="btn btn-buy" onClick={() => navigate("/makepayment", {state: {product}})}>Purchase Now</button>
               </div>

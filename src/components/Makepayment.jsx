@@ -6,8 +6,15 @@ import '../css/Makepayment.css';
 
 const Makepayment = () => {
     const location = useLocation();
-    const { product } = location.state || {};
-    const navigate = useNavigate();
+const navigate = useNavigate();
+
+const { product, total = 0 } = location.state || {};
+
+const items = product
+  ? Array.isArray(product)
+    ? product
+    : [product]
+  : [];
     const img_url = "https://hope.alwaysdata.net/static/images/";
 
     const [number, setNumber] = useState("");
@@ -27,7 +34,7 @@ const Makepayment = () => {
         try {
             const formdata = new FormData();
             formdata.append("phone", number);
-            formdata.append("amount", product.product_cost);
+            formdata.append("amount", total || product.product_cost);
 
             const response = await axios.post("https://hope.alwaysdata.net/api/mpesa_payment", formdata);
             setLoading(false);

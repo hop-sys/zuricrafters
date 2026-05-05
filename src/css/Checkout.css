@@ -1,0 +1,77 @@
+/* Checkout Page Container */
+.container {
+  max-width: 1100px;
+}
+
+/* Page Title */
+h2 {
+  font-weight: 700;
+  color: #5c3d2e;
+}
+
+/* Empty cart text */
+h4 {
+  color: #888;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Cart Card */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+/* Product name */
+.card h5 {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Price text */
+.card p {
+  margin: 5px 0;
+  color: #777;
+}
+
+/* Quantity text */
+.card small {
+  color: #999;
+}
+
+/* Total Section */
+.text-end h3 {
+  font-weight: 700;
+  color: #2e7d32;
+}
+
+/* Checkout Button */
+.btn-success {
+  padding: 10px 25px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Remove button (if you add it later) */
+.btn-danger {
+  border-radius: 6px;
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .text-end {
+    text-align: center !important;
+  }
+}

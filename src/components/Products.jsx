@@ -66,8 +66,6 @@ const Products = () => {
                                             >
                                                 Purchase
                                             </button>
-                                            {/* <button className="btn btn-buy"  */}
-                                            {/* onClick={() => navigate("/makepayment", {state: {product}})}>Purchase Now</button> */}
                                         </div>
                                     </div>
                                 </div>
