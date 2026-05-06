@@ -22,7 +22,6 @@ const Aboutus = () => {
             </div>
           </div>
 
-          {/* Right Side: The Story */}
           <div className="col-lg-7 ps-lg-5">
             <h6 className="text-uppercase ls-2 mb-2 brand-gold">Our Heritage</h6>
             <h2 className="display-5 mb-4 brand-brown">Crafting Elegance from Within</h2>

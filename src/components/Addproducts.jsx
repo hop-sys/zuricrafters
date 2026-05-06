@@ -9,6 +9,7 @@ const Addproducts = () => {
   const [product_name, setProductName] = useState("");
   const [product_description, setProductDescription] = useState("");
   const [product_cost, setProductCost] = useState("");
+  const [product_category, setProductCategory] = useState("");
   const [product_photo, setProductPhoto] = useState("");
 
   // declare the additional hooks to manage the state of the application
@@ -33,6 +34,7 @@ const Addproducts = () => {
       formdata.append("product_name", product_name);
       formdata.append("product_description", product_description);
       formdata.append("product_cost", product_cost);
+      formdata.append("product_category", product_category);
       formdata.append("product_photo", product_photo);
 
       // interact with axios to help you use the method POST
@@ -49,6 +51,7 @@ const Addproducts = () => {
       setProductDescription("");
       setProductCost("");
       setProductPhoto("");
+      setProductCategory("");
 
       e.target.reset()
 
@@ -100,6 +103,13 @@ const Addproducts = () => {
           onChange={(e) => setProductCost(e.target.value)}/> <br />
 
           {/* {product_cost} */}
+
+          <input type="text"
+          placeholder='Enter the craft category'
+          className='form-control'
+          required 
+          value={product_category}
+          onChange={(e) => setProductCategory(e.target.value)}/> <br />
 
           <label className='text-warning'>Craft photo</label>
           <input type="file"

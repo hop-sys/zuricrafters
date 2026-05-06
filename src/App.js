@@ -11,7 +11,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import OurStory from './components/OurStory';
 import FloatingButtons from "./components/FloatingButtons";
-// import ContactUs from './components/ContactUs';
+import ContactUs from './components/ContactUs';
 // import Mycarousel from './components/Mycarousel';
 // import SearchBar from "./components/SearchBar";
 import Aboutus from './components/Aboutus';
@@ -37,9 +37,9 @@ function App() {
         <Route path='*' element={<Notfound />}/>
         <Route path='/aboutus' element={<Aboutus />}/>
         <Route path='/ourstory' element={<OurStory />}/>
+        <Route path='/contactus' element={<ContactUs />}/>
         <Route path='/checkout' element={<Checkout />}/>
         <Route path='/chatbot' element={<ChatBot />}/>
-        {/* <Route path='/contacuUs' element={<ContactUs />}/> */}
       </Routes>
     </div>
      <Footer/>
