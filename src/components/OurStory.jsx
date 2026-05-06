@@ -5,7 +5,6 @@ const OurStory = () => {
   return (
     <div className="story-container">
       <header className="story-header">
-        <span className="subtitle">Nairobi • Since 2026</span>
         <h1>Our Story</h1>
       </header>
 
@@ -37,10 +36,6 @@ const OurStory = () => {
             you make supports a sustainable livelihood for our artisans and keeps 
             the flame of traditional craftsmanship burning bright.
           </p>
-        </div>
-        
-        <div className="story-image-placeholder">
-          <div className="craft-overlay">Artisan Heritage</div>
         </div>
       </section>
     </div>

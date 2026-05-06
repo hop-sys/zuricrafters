@@ -114,16 +114,6 @@ const Footer = () => {
                 {status && <p className="text-cream small mb-2">{status}</p>}
 
                 <input
-                  type="text"
-                  className="form-control zuri-input py-2 mb-2"
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  disabled={loading}
-                />
-
-                <input
                   type="email"
                   className="form-control zuri-input py-2 mb-2"
                   placeholder="Your email"
@@ -164,7 +154,7 @@ const Footer = () => {
         {/* Bottom line */}
         <div className="footer-bottom text-center mt-4 pt-4 border-top border-faded">
           <div className="d-flex justify-content-center gap-4 mb-2">
-            <span className="brand-details detail-item">📍 Studio • Nairobi, Kenya</span>
+            <span className="brand-details detail-item"> Studio • Nairobi, Kenya</span>
             <span className="brand-details detail-item">✔ Artisan Certified</span>
           </div>
           <p className="text-cream small mb-0">&copy; 2026 Zuri Crafters. All rights reserved. Designed in Nairobi.</p>

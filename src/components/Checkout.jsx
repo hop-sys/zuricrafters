@@ -1,90 +1,136 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/Checkout.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/Checkout.css";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
-  const removeFromCart = (productId) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) return;
+  const cartKey = user ? `cart_${user.email}` : null;
 
-  const cartKey = `cart_${user.email}`;
-
-  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-  // remove item
-  cart = cart.filter(item => item.id !== productId);
-
-  localStorage.setItem(cartKey, JSON.stringify(cart));
-};
+  // LOAD CART
+  const loadCart = () => {
+    if (!user) return;
+    const savedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    setCart(savedCart);
+  };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    // 🔒 block non-logged users
     if (!user) {
       navigate("/signup");
       return;
     }
 
-    const cartKey = `cart_${user.email}`;
-    const savedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    loadCart();
+  }, []);
 
-    setCart(savedCart);
-  }, [navigate]);
+  // SAVE CART HELPER
+  const saveCart = (updatedCart) => {
+    localStorage.setItem(cartKey, JSON.stringify(updatedCart));
+    setCart(updatedCart);
+    window.dispatchEvent(new Event("storage"));
+  };
 
-  // 💰 calculate total
-  const total = cart.reduce((sum, item) => {
-    return sum + Number(item.product_cost) * (item.quantity || 1);
-  }, 0);
+  // ➕ INCREASE
+  const increaseQty = (id) => {
+    const updated = cart.map((item) =>
+      item.product_id === id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+
+    saveCart(updated);
+  };
+
+  // ➖ DECREASE
+  const decreaseQty = (id) => {
+    let updated = cart.map((item) =>
+      item.product_id === id
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+
+    // remove if qty <= 0
+    updated = updated.filter((item) => item.quantity > 0);
+
+    saveCart(updated);
+  };
+
+  // ❌ REMOVE ITEM
+  const removeFromCart = (id) => {
+    const updated = cart.filter((item) => item.product_id !== id);
+    saveCart(updated);
+  };
+
+  // TOTAL
+  const total = cart.reduce(
+    (sum, item) => sum + Number(item.product_cost) * item.quantity,
+    0
+  );
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">🧾 Checkout Summary</h2>
+      <h2>🧾 Checkout</h2>
 
       {cart.length === 0 ? (
         <h4>Your cart is empty 🛒</h4>
       ) : (
         <>
-          <div className="row">
-            {cart.map((item, index) => (
-              <div key={index} className="col-md-12 mb-3">
-                <div className="card p-3 d-flex flex-row justify-content-between align-items-center">
+          {cart.map((item) => (
+            <div key={item.product_id} className="col-md-12 mb-3">
+              <div className="card p-3 d-flex flex-row justify-content-between align-items-center">
 
-                  <div>
-                    <h5>{item.product_name}</h5>
-                    <p>KSh {item.product_cost}</p>
-                    <small>Qty: {item.quantity || 1}</small>
-                  </div>
-
-                  <div>
-                    <strong>
-                      KSh {(item.product_cost * (item.quantity || 1))}
-                    </strong>
-                  </div>
-
+                {/* PRODUCT INFO */}
+                <div>
+                  <h5>{item.product_name}</h5>
+                  <p>KSh {item.product_cost}</p>
                 </div>
+
+                {/* QUANTITY CONTROLS */}
+                <div className="d-flex align-items-center gap-2">
+
+                  <button
+                    className="btn btn-sm btn-dark"
+                    onClick={() => decreaseQty(item.product_id)}
+                  >
+                    ➖
+                  </button>
+
+                  <span style={{ fontWeight: "bold" }}>
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    className="btn btn-sm btn-dark"
+                    onClick={() => increaseQty(item.product_id)}
+                  >
+                    ➕
+                  </button>
+                </div>
+
+                {/* TOTAL */}
+                <div>
+                  <strong>
+                    KSh {item.product_cost * item.quantity}
+                  </strong>
+                </div>
+
+                {/* REMOVE */}
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => removeFromCart(item.product_id)}
+                >
+                  Remove
+                </button>
+
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
 
-          {/* TOTAL */}
           <div className="text-end mt-4">
-            <h3>Total: KSh {total}</h3>
-
-            <button
-  className="btn btn-warning mt-3"
-  onClick={() =>
-    navigate("/makepayment", {
-      state: { product: cart, total }
-    })
-  }
->
-  Proceed to Payment
-</button>
+            <h3>Total: KSh {total.toFixed(2)}</h3>
           </div>
         </>
       )}

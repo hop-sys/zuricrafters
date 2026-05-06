@@ -9,7 +9,6 @@ import Makepayment from './components/Makepayment';
 import Notfound from './components/Notfound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Ratings from './components/Ratings';
 import OurStory from './components/OurStory';
 import FloatingButtons from "./components/FloatingButtons";
 // import ContactUs from './components/ContactUs';
@@ -18,7 +17,6 @@ import FloatingButtons from "./components/FloatingButtons";
 import Aboutus from './components/Aboutus';
 import Checkout from './components/Checkout';
 import ChatBot from './components/ChatBot';
-// import Products from './components/Products';
 
 function App() {
   return (
@@ -36,7 +34,6 @@ function App() {
         <Route path='/signin' element={<Signin />} />
         <Route path='/addproducts' element={<Addproducts/>} />
         <Route path='/makepayment' element={<Makepayment/>} />
-        <Route path='/ratings' element={<Ratings />}/>
         <Route path='*' element={<Notfound />}/>
         <Route path='/aboutus' element={<Aboutus />}/>
         <Route path='/ourstory' element={<OurStory />}/>
