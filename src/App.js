@@ -14,7 +14,7 @@ import OurStory from './components/OurStory';
 // import FloatingButtons from "./components/FloatingButtons";
 import ContactUs from './components/ContactUs';
 // import Mycarousel from './components/Mycarousel';
-// import SearchBar from "./components/SearchBar";
+import SearchBar from "./components/SearchBar";
 import Aboutus from './components/Aboutus';
 import Checkout from './components/Checkout';
 import ChatBot from './components/ChatBot';
@@ -43,14 +43,15 @@ const toggleDarkMode = () => {
         <Route path='/' element={<Getproducts/>} />
         <Route path='/signup' element={<Signup/>} />
         <Route path='/signin' element={<Signin />} />
-        <Route path='/addproducts' element={<Addproducts/>} />
+        <Route path='/addproducts' element={<Addproducts darkMode={darkMode}/>} />
         <Route path='/makepayment' element={<Makepayment/>} />
         <Route path='*' element={<Notfound />}/>
         <Route path='/aboutus' element={<Aboutus />}/>
         <Route path='/ourstory' element={<OurStory />}/>
         <Route path='/contactus' element={<ContactUs />}/>
         <Route path='/checkout' element={<Checkout />}/>
-        <Route path='/chatbot' element={<ChatBot />}/>
+        <Route path='/chatbot' element={<ChatBot darkMode={darkMode}/>}/>
+        <Route path='/search' element={<SearchBar />}/>
       </Routes>
       <ChatBot />
      <Footer/>

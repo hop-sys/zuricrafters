@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../css/ChatBot.css";
 
-const ChatBot = () => {
+const ChatBot = ({ darkMode }) => {
   const [messages, setMessages] = useState([
     { from: "bot", text: "Hi 👋 I’m ZuriBot. How can I help you today?" }
   ]);
@@ -33,7 +33,7 @@ const ChatBot = () => {
   return matches / words.length;
 };
 
-  // 🤖 SIMPLE RULE-BASED BRAIN
+  // SIMPLE RULE-BASED BRAIN
  const getBotResponse = (msg) => {
   const input = msg.toLowerCase();
 
@@ -173,9 +173,9 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {open && (
-        <div className="chat-box">
+        <div className={`chat-box ${darkMode ? "chatbot-dark" : "chatbot-light"}`}>
           <div className="chat-header">
-            ZuriBot 🤖
+            ZuriBot
             <span onClick={() => setOpen(false)}>✖</span>
           </div>
 
