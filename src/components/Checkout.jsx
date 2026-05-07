@@ -7,6 +7,7 @@ const Checkout = () => {
   const [cart, setCart] = useState([]);
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -73,19 +74,20 @@ const Checkout = () => {
   // PAYMENT
   const handlePayment = async () => {
   if (!phone) {
-    alert("Please enter your M-Pesa number");
+    setStatusMessage("Please enter your M-Pesa number"); // Set message instead of alert
     return;
   }
 
   try {
     setLoading(true);
+    setStatusMessage("Connecting to M-Pesa..."); // Give the user feedback immediately
 
     const formData = new FormData();
     formData.append("phone", phone);
     formData.append("amount", total);
 
     const response = await fetch(
-      "http://hope.alwaysdata.net/api/mpesa_payment",
+      "https://hope.alwaysdata.net/api/mpesa_payment",
       {
         method: "POST",
         body: formData,
@@ -95,17 +97,20 @@ const Checkout = () => {
     const data = await response.json();
 
     if (data.message) {
-      alert(data.message);
+      setStatusMessage(data.message); // Show success message on screen
     }
 
-    // clear cart after request is sent
+    // Clear cart and reset phone
     setCart([]);
     localStorage.removeItem(cartKey);
     setPhone("");
 
+    // Optional: Clear the message after 6 seconds
+    setTimeout(() => setStatusMessage(""), 6000);
+
   } catch (error) {
     console.error("Payment error:", error);
-    alert("Payment failed. Try again.");
+    setStatusMessage("Payment failed. Please check your connection and try again.");
   } finally {
     setLoading(false);
   }
@@ -182,6 +187,28 @@ const Checkout = () => {
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
+
+          {/* ON-SCREEN NOTIFICATION */}
+{statusMessage && (
+  <div className="alert mt-3" style={{ 
+      backgroundColor: "#FFB74D", // Savannah Gold
+      color: "#5C3D2E",           // Earthy Brown
+      border: "1px solid #5C3D2E",
+      fontWeight: "bold",
+      textAlign: "center"
+  }}>
+    {statusMessage}
+  </div>
+)}
+
+          {/* PAY BUTTON */}
+          <button
+            className="btn btn-success mt-3 w-100" // Added w-100 for a better mobile look
+            onClick={handlePayment}
+            disabled={loading || cart.length === 0}
+          >
+            {loading ? "Processing..." : "Pay Now (M-Pesa)"}
+          </button>
 
           {/* PAY BUTTON */}
           <button

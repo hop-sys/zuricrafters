@@ -136,8 +136,6 @@ const Getproducts = () => {
           </div>
         );
       })}
-
-      <Aboutus />
     </div>
   );
 };
