@@ -26,7 +26,7 @@ const Mycarousel = () => {
               alt="First slide"
               height="450px"
             />
-            <div className="carousel-caption d-none d-md-block bg-dark opacity-50">
+            <div className="carousel-caption d-none d-md-block carousel-text">
               <h5>From traditional earth-dye techniques to your daily carry.</h5>
               <p>Every line tells a story. Our latest addition to the Zuri collection brings the ancient geometric art of Mudcloth into a modern silhouette..</p>
             </div>
@@ -39,7 +39,7 @@ const Mycarousel = () => {
               alt="Second slide"
               height="450px"
             />
-            <div className="carousel-caption d-none d-md-block bg-dark opacity-50">
+            <div className="carousel-caption d-none d-md-block carousel-text">
               <h5>Textures of the earth.</h5>
               <p>Bring the warmth of the Kenyan sun into your living space. Our woven collection isn't just about storage; it's about preserving a craft that has been passed down for generations.</p>
             </div>
@@ -52,7 +52,7 @@ const Mycarousel = () => {
               alt="Third slide"
               height="450px"
             />
-            <div className="carousel-caption d-none d-md-block bg-dark opacity-50">
+            <div className="carousel-caption d-none d-md-block carousel-text">
               <h5>We don't just sell art; we share stories.</h5>
               <p>At Zuri Crafters, we believe the process is just as beautiful as the product. Meet the talent bringing our vision to life in the heart of the workshop.</p>
             </div>

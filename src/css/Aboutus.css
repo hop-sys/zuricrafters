@@ -61,3 +61,29 @@
     color: #5c3d2e;
     text-transform: uppercase;
 }
+.dark-mode .about-section {
+  background-color: #121212;
+  color: white;
+}
+.dark-mode .about-section p,
+.dark-mode .about-section h1,
+.dark-mode .about-section h2,
+.dark-mode .about-section h3,
+.dark-mode .about-section h4,
+.dark-mode .about-section h5,
+.dark-mode .about-section h6 {
+  color: white;
+}
+.dark-mode .text-muted {
+  color: #cccccc;
+}
+.dark-mode .brand-brown {
+  color: #ffffff;
+}
+
+.dark-mode .brand-gold {
+  color: #ffcc70;
+}
+.dark-mode #about {
+  background-color: #121212;
+}

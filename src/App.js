@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/Signup';
@@ -10,7 +11,7 @@ import Notfound from './components/Notfound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import OurStory from './components/OurStory';
-import FloatingButtons from "./components/FloatingButtons";
+// import FloatingButtons from "./components/FloatingButtons";
 import ContactUs from './components/ContactUs';
 // import Mycarousel from './components/Mycarousel';
 // import SearchBar from "./components/SearchBar";
@@ -19,12 +20,22 @@ import Checkout from './components/Checkout';
 import ChatBot from './components/ChatBot';
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(
+  localStorage.getItem("theme") === "dark"
+);
+
+const toggleDarkMode = () => {
+  const newTheme = darkMode ? "light" : "dark";
+  setDarkMode(!darkMode);
+  localStorage.setItem("theme", newTheme);
+};
+
   return (
     <Router>
-      <div className="App">
+      <div className={darkMode ? "dark-mode" : "light-mode"}>
         <header className="App-header">
-           <Navbar />
-           <FloatingButtons />
+           <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
            {/* <Ratings/> */}
       </header>
     
@@ -41,8 +52,9 @@ function App() {
         <Route path='/checkout' element={<Checkout />}/>
         <Route path='/chatbot' element={<ChatBot />}/>
       </Routes>
-    </div>
+      <ChatBot />
      <Footer/>
+    </div>
     </Router>
   );
 }

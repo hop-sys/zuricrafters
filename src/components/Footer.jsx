@@ -68,22 +68,6 @@ const Footer = () => {
             </div>
 
             <div className="row g-4 justify-content-center justify-content-lg-start">
-
-              <div className="col-6 col-md-4">
-                <h6 className="footer-heading">Collections</h6>
-                <ul className="list-unstyled footer-links">
-                  <li>
-                    <NavLink to="/kiondo">Kiondo Totes</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/jewelry">Artisan Jewelry</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/products">Beadwork</NavLink>
-                  </li>
-                </ul>
-              </div>
-
               <div className="col-6 col-md-4">
                 <h6 className="footer-heading">Zuri Studio</h6>
                 <ul className="list-unstyled footer-links">

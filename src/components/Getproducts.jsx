@@ -7,6 +7,7 @@ import "../css/Getproducts.css";
 import Mycarousel from "./Mycarousel";
 import Aboutus from "./Aboutus";
 import SearchBar from "./SearchBar";
+import FloatingButtons from "./FloatingButtons";
 
 const Getproducts = () => {
   const [products, setProducts] = useState([]);
@@ -78,6 +79,7 @@ const Getproducts = () => {
 
   return (
     <div className="row">
+      <FloatingButtons />
       <Mycarousel />
       <SearchBar onSearch={setSearch} />
 

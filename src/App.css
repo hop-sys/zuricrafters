@@ -1,5 +1,275 @@
+:root {
+  /* Brand Theme Colors */
+  --primary-brown: #8B5E3C;
+  --cream-light: #F8F1E5;
+  --gold-accent: #D4A017;
+  --deep-brown: #5C3A21;
+  --clay-orange: #C96A3D;
+}
+
+/* ==========================================================================
+   GLOBAL STYLE BASICS
+   ========================================================================== */
+body {
+  background-color: var(--cream-light);
+  color: #3B2F2F;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+}
+
 .App {
   text-align: center;
+}
+
+/* Header style if still used elsewhere */
+.App-header {
+  background-color: var(--primary-brown);
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   NAVBAR (The Solid Background, Straight-Line & Icon Visibility Fixes)
+   ========================================================================== */
+.navbar {
+  transition: all 0.3s ease;
+  background-color: var(--primary-brown) !important; 
+  width: 100% !important;
+  margin: 0;
+  padding: 12px 0;
+  border: none;
+}
+
+/* Forces the container inside the navbar to align everything in a perfect row */
+.navbar .container, 
+.navbar .container-fluid {
+  background-color: transparent !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* Strictly prevents wrapping to a second line */
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Horizontal alignment of link items */
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important; /* Forces side-by-side links on all screens */
+  align-items: center !important;
+  gap: 20px; /* Uniform spacing between navigation links */
+  margin: 0 !important;
+  padding: 0;
+}
+
+.nav-item {
+  display: flex !important;
+  align-items: center;
+}
+
+/* BRAND TEXT (Zuri Crafters) visibility */
+.navbar-brand, .brand-text {
+  color: var(--cream-light) !important;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-right: 25px;
+}
+
+/* NAV LINKS AND SPANS (Ensuring visibility) */
+.navbar .nav-link {
+  color: var(--cream-light) !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+  color: var(--gold-accent) !important;
+}
+
+/* ICON VISIBILITY (Light Mode & Cart Icon fixes) */
+.navbar i, 
+.navbar .bi, 
+.navbar span {
+  color: var(--cream-light) !important; /* Forces icons to be bright and visible */
+  opacity: 1 !important;
+  font-size: 1.15rem; /* Makes icons easily clickable */
+}
+
+/* Specific buttons inside the navbar */
+.navbar-btn {
+  background-color: transparent;
+  color: var(--cream-light) !important;
+  border: 1px solid var(--cream-light);
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.navbar-btn:hover {
+  background-color: var(--clay-orange);
+  border-color: var(--clay-orange);
+  color: white !important;
+}
+
+/* ==========================================================================
+   CARDS & PRODUCTS
+   ========================================================================== */
+.product_img {
+  object-fit: contain;
+  width: 100%;
+  height: 150px;
+}
+
+.light-mode .card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--gold-accent);
+  border-radius: 15px;
+  box-shadow: var(--gold-accent) 1px 1px;
+}
+
+.card-title {
+  color: var(--deep-brown);
+  font-weight: bold;
+}
+
+.card-text {
+  color: #333333;
+}
+
+.price {
+  color: var(--clay-orange);
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   CAROUSEL
+   ========================================================================== */
+.carousel-item img {
+  height: 450px;
+  object-fit: cover;
+  filter: brightness(0.8);
+}
+
+.carousel-text {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 80%;
+  margin: auto;
+}
+
+.carousel-text h5,
+.carousel-text p {
+  color: #F5E6D3;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* ==========================================================================
+   DARK MODE OVERRIDES
+   ========================================================================== */
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Forces the navbar to change to clean black in dark mode across the entire screen */
+.dark-mode .navbar {
+  background-color: #000000 !important;
+}
+
+/* Brand Name turns classy Gold in dark mode */
+.dark-mode .navbar-brand {
+  color: var(--gold-accent) !important;
+}
+
+/* Adjust dark mode navigation link & icon colors to pure white */
+.dark-mode .navbar .nav-link,
+.dark-mode .navbar i,
+.dark-mode .navbar .bi,
+.dark-mode .navbar span {
+  color: #ffffff !important;
+}
+
+.dark-mode .navbar .nav-link:hover {
+  color: var(--gold-accent) !important;
+}
+
+.dark-mode .navbar-btn {
+  background-color: transparent;
+  color: #ffffff !important;
+  border: 1px solid #ffffff;
+}
+
+.dark-mode .navbar-btn:hover {
+  background-color: var(--gold-accent);
+  border-color: var(--gold-accent);
+  color: white !important;
+}
+
+/* Dark Mode Card Styling */
+.dark-mode .card {
+  background-color: #1E1E1E;
+  color: #ffffff;
+  border: 1px solid #333;
+}
+
+.dark-mode .card p,
+.dark-mode .card h1,
+.dark-mode .card h2,
+.dark-mode .card h3,
+.dark-mode .card h4,
+.dark-mode .card h5 {
+  color: #ffffff;
+}
+
+.dark-mode .price {
+  color: var(--gold-accent);
+}
+
+/* Dark Mode Inputs */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #2A2A2A;
+  color: white;
+  border: 1px solid #444;
+}
+
+.dark-mode .container,
+.dark-mode .container-fluid,
+.dark-mode .row {
+  background-color: transparent;
+  color: inherit;
+}
+
+/* ==========================================================================
+   FOOTER & ANIMATIONS
+   ========================================================================== */
+.auth-footer {
+  text-align: center;
+  margin-top: 15px;
+  color: var(--primary-brown);
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: var(--gold-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  color: var(--clay-orange);
 }
 
 .App-logo {
@@ -13,45 +283,7 @@
   }
 }
 
-.App-header {
-  background-color: #8B5E3C;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #FFFFFF;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.auth-footer {
-  text-align: center;
-  margin-top: 15px;
-  color: #8B5E3C; /* deep brown */
-  font-size: 14px;
-}
-.auth-footer a {
-  color: #D4A017; /* golden yellow */
-  text-decoration: none;
-  font-weight: 600;
-}
-.auth-footer a:hover {
-  color: #C96A3D;
-}
-.product_img{
-  object-fit: contain;
-  width: 100%;
-  height: 150px;
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

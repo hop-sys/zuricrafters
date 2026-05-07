@@ -49,9 +49,9 @@
 
 
 .zuri-input {
-    background-color: transparent !important;
-    border: 1px solid rgba(248, 249, 245, 0.2) !important;
-    color: var(--zuri-cream) !important;
+    background-color: transparent;
+    border: 1px solid rgba(248, 249, 245, 0.2);
+    color: var(--zuri-cream);
     border-radius: 8px;
     font-size: 0.9rem;
 }
@@ -62,22 +62,22 @@
 }
 
 .zuri-input:focus {
-    border-color: var(--zuri-gold) !important;
+    border-color: var(--zuri-gold);
     box-shadow: 0 0 0 0.2rem rgba(184, 134, 11, 0.2);
 }
 
 .zuri-signup-btn {
-    background-color: var(--zuri-gold) !important;
-    border: none !important;
+    background-color: var(--zuri-gold);
+    border: none;
     border-radius: 8px;
-    color: #fff !important;
+    color: #fff;
     font-weight: 600;
     font-size: 0.9rem;
     transition: background 0.3s ease;
 }
 
 .zuri-signup-btn:hover {
-    background-color: #a07855 !important;
+    background-color: #a07855;
 }
 
 .brand-details {
@@ -93,7 +93,7 @@
 }
 
 .border-faded {
-    border-color: rgba(248, 249, 245, 0.1) !important;
+    border-color: rgba(248, 249, 245, 0.1);
 }
 .social-icon-link {
     width: 40px;
