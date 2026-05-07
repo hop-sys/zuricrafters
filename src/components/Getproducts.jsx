@@ -5,7 +5,6 @@ import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import "../css/Getproducts.css";
 import Mycarousel from "./Mycarousel";
-import Aboutus from "./Aboutus";
 import SearchBar from "./SearchBar";
 import FloatingButtons from "./FloatingButtons";
 
