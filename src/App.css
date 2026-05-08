@@ -288,3 +288,90 @@ body:has(.dark-mode) {
     color: #333;
     border-bottom: 1px solid #ccc;
 }
+/* ==========================================================================
+   AUTH BUTTON CLEANUP
+   ========================================================================== */
+
+/* Target the specific Sign In button to remove the white offset */
+.dark-mode .btn-primary, 
+.dark-mode .btn-buy, 
+.dark-mode .navbar-btn {
+    background-color: var(--gold-accent) !important;
+    border-color: var(--gold-accent) !important;
+    color: #000000 !important;
+    font-weight: bold;
+    
+    /* ADD THESE TWO LINES TO REMOVE THE WHITE THING */
+    box-shadow: none !important; 
+    border: none !important; 
+    
+    /* Optional: If you want a subtle glow instead of a hard white block */
+    /* box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3) !important; */
+}
+
+/* Ensure it stays clean when clicked or hovered */
+.dark-mode .btn-primary:active, 
+.dark-mode .btn-primary:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    transform: translateY(0); /* Prevents the button from "jumping" */
+}
+/* FORCE RESET FOR THE SIGN-IN BUTTON */
+button.btn-primary, 
+.dark-mode button, 
+.dark-mode .btn {
+    box-shadow: none !important;
+    border-bottom: none !important;
+    border: none !important;
+    background-image: none !important; /* Removes gradients that can look like shadows */
+    transform: none !important; /* Fixes any '3D' lift effects */
+}
+
+/* Specific fix if you're using an <a> tag styled as a button */
+.dark-mode a.btn {
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+/* ==========================================================================
+   ADD PRODUCT FORM CONSISTENCY
+   ========================================================================== */
+
+/* 1. Fix Input Backgrounds and Text Colors */
+.dark-mode .form-control,
+.dark-mode input[type="text"],
+.dark-mode input[type="number"],
+.dark-mode input[type="file"] {
+    background-color: #2A2A2A !important; /* Matches your Sign In input color */
+    color: #FFFFFF !important;
+    border: 1px solid var(--gold-accent) !important;
+}
+
+/* 2. Fix the "Choose File" button inside the file input */
+.dark-mode input[type="file"]::file-selector-button {
+    background-color: var(--gold-accent) !important;
+    color: #000000 !important;
+    border: none;
+    padding: 8px 15px;
+    margin-right: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 3. Make the "Add Craft" button Gold */
+.dark-mode .btn-add-craft, 
+.dark-mode button[type="submit"] {
+    background-color: var(--gold-accent) !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    text-transform: none; /* Set to uppercase if you want it exactly like Sign In */
+    border: none !important;
+    box-shadow: none !important; /* This removes that white thing you hated! */
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* 4. Fix Placeholder visibility */
+.dark-mode input::placeholder {
+    color: rgba(212, 160, 23, 0.6) !important; /* Gold-ish placeholder */
+}
