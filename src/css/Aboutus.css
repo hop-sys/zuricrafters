@@ -1,6 +1,21 @@
-.brand-brown { color: #5c3d2e; font-weight: 700; }
-.brand-gold { color: #b8860b; letter-spacing: 2px; font-weight: 600; font-size: 0.9rem; }
+/* ==========================================================================
+   BRAND TYPOGRAPHY
+   ========================================================================== */
+.brand-brown { 
+    color: #5c3d2e; 
+    font-weight: 700; 
+}
 
+.brand-gold { 
+    color: #b8860b; 
+    letter-spacing: 2px; 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+}
+
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
 .about-section {
     background-color: #faf9f6; /* Soft parchment background */
 }
@@ -44,7 +59,7 @@
     border: 2px solid #ffffff;
 }
 
-/* Features Icons */
+/* Feature Icons */
 .feature-item {
     text-align: center;
 }
@@ -61,29 +76,25 @@
     color: #5c3d2e;
     text-transform: uppercase;
 }
+
+/* ==========================================================================
+   DARK MODE OVERRIDES (Consolidated)
+   ========================================================================== */
+.dark-mode #about,
 .dark-mode .about-section {
-  background-color: #121212;
-  color: white;
+    background-color: #121212 !important;
+    color: white;
 }
-.dark-mode .about-section p,
-.dark-mode .about-section h1,
-.dark-mode .about-section h2,
-.dark-mode .about-section h3,
-.dark-mode .about-section h4,
-.dark-mode .about-section h5,
-.dark-mode .about-section h6 {
-  color: white;
-}
-.dark-mode .text-muted {
-  color: #cccccc;
-}
-.dark-mode .brand-brown {
-  color: #ffffff;
+
+/* Combined heading and paragraph overrides for efficiency */
+.dark-mode .about-section :is(h1, h2, h3, h4, h5, h6, p, .brand-brown) {
+    color: #ffffff !important;
 }
 
 .dark-mode .brand-gold {
-  color: #ffcc70;
+    color: #ffcc70 !important;
 }
-.dark-mode #about {
-  background-color: #121212;
+
+.dark-mode .text-muted {
+    color: #cccccc !important;
 }

@@ -375,3 +375,79 @@ button.btn-primary,
 .dark-mode input::placeholder {
     color: rgba(212, 160, 23, 0.6) !important; /* Gold-ish placeholder */
 }
+/* BASE CARD STYLE (Light Mode Default) */
+.card {
+    background-color: #FFFFFF !important; /* Force white in light mode */
+    color: #3B2F2F !important;             /* Dark text for readability */
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+/* DARK MODE OVERRIDE */
+.dark-mode .card {
+    background-color: var(--dark-card) !important; /* Switch to #1E1E1E */
+    color: #FFFFFF !important;                     /* Switch to light text */
+    border: 1px solid var(--gold-accent) !important;
+}
+
+/* Ensure the card body follows the same logic */
+.dark-mode .card-body {
+    background-color: transparent !important;
+}
+/* ==========================================================================
+   THEME CONSISTENCY FIX
+   ========================================================================== */
+
+/* 1. Force Light Mode Defaults */
+.App:not(.dark-mode) .card,
+.light-mode .card,
+body:not(:has(.dark-mode)) .card {
+    background-color: #ffffff !important;
+    color: #3B2F2F !important;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+}
+
+/* 2. Force Dark Mode Overrides */
+.dark-mode .card,
+body:has(.dark-mode) .card {
+    background-color: #1E1E1E !important; /* var(--dark-card) */
+    color: #ffffff !important;
+    border: 1px solid var(--gold-accent) !important;
+    box-shadow: none !important;
+}
+
+/* 3. Text and Price alignment for Light Mode */
+.light-mode .card-title, 
+.light-mode h5 {
+    color: var(--deep-brown) !important;
+}
+
+.light-mode .price, 
+.light-mode h4 {
+    color: var(--clay-orange) !important;
+}
+/* ==========================================================================
+   CAROUSEL LIGHT MODE (Standard Text)
+   ========================================================================== */
+
+.App:not(.dark-mode) .carousel-caption h1,
+.App:not(.dark-mode) .carousel-caption h2,
+.App:not(.dark-mode) .carousel-caption h3,
+.light-mode .carousel-caption h5 {
+    color: antiquewhite !important; /* Deep Espresso Brown */
+    font-weight: 800;
+    text-shadow: none !important; /* Removes all effects */
+}
+
+.App:not(.dark-mode) .carousel-caption p,
+.light-mode .carousel-caption p {
+    color: #ffffff !important; /* Brand Brown */
+    font-weight: 500;
+    text-shadow: none !important;
+}
+
+/* Ensure the image remains clear */
+.light-mode .carousel-item img {
+    filter: none !important;
+}

@@ -45,3 +45,117 @@ body{
     overflow: hidden;
     min-height: 4.5em; /* Ensure even short descriptions take up this much space */
 }
+/* Ensure the card container is a flexbox */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Important for alignment in rows */
+    background-color: var(--dark-card) !important;
+    border: 1px solid var(--gold-accent) !important;
+    border-radius: 12px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows the body to expand to fill space */
+}
+
+/* The magic alignment class */
+.mt-auto {
+    margin-top: auto !important;
+    padding-top: 15px;
+}
+
+/* Ensure buttons take full width if desired, or stay side-by-side */
+.btn-buy {
+    background-color: var(--gold-accent) !important;
+    color: #000 !important;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-outline-warning {
+    border-color: var(--gold-accent) !important;
+    color: var(--gold-accent) !important;
+}
+/* 1. Base state: Gold border, Gold text */
+.btn-outline-warning {
+    color: var(--gold-accent) !important;
+    border-color: var(--gold-accent) !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+}
+
+/* 2. Hover state: Gold background, Black text */
+.btn-outline-warning:hover {
+    background-color: var(--gold-accent) !important;
+    color: #000000 !important;
+    border-color: var(--gold-accent) !important;
+}
+
+/* 3. THE FIX: Clicked/Active state */
+/* This ensures that when you click, the text stays dark and the background stays gold */
+.btn-outline-warning:active, 
+.btn-outline-warning:focus, 
+.btn-outline-warning.active {
+    background-color: #b88a14 !important; /* A slightly deeper gold for the 'press' effect */
+    color: #000000 !important;             /* Force black text so it is visible */
+    border-color: #b88a14 !important;
+    box-shadow: none !important;           /* Removes that blue/white glow on click */
+}
+
+/* If you are using the Bootstrap button classes specifically */
+.btn-check:checked + .btn-outline-warning, 
+.btn-outline-warning.active, 
+.btn-outline-warning.dropdown-toggle.show, 
+.btn-outline-warning:active {
+    color: #000 !important;
+    background-color: var(--gold-accent) !important;
+}
+/* Light mode specific title and text colors */
+.light-mode .card-title {
+    color: var(--deep-brown) !important;
+}
+
+.light-mode .card-text {
+    color: #555 !important;
+}
+
+/* Dark mode specific title and text colors */
+.dark-mode .card-title {
+    color: var(--gold-accent) !important;
+}
+/* ==========================================================================
+   THEME CONSISTENCY FIX
+   ========================================================================== */
+
+/* 1. Force Light Mode Defaults */
+.App:not(.dark-mode) .card,
+.light-mode .card,
+body:not(:has(.dark-mode)) .card {
+    background-color: #ffffff !important;
+    color: #3B2F2F !important;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+}
+
+/* 2. Force Dark Mode Overrides */
+.dark-mode .card,
+body:has(.dark-mode) .card {
+    background-color: #1E1E1E !important; /* var(--dark-card) */
+    color: #ffffff !important;
+    border: 1px solid var(--gold-accent) !important;
+    box-shadow: none !important;
+}
+
+/* 3. Text and Price alignment for Light Mode */
+.light-mode .card-title, 
+.light-mode h5 {
+    color: var(--deep-brown) !important;
+}
+
+.light-mode .price, 
+.light-mode h4 {
+    color: var(--clay-orange) !important;
+}

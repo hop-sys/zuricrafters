@@ -21,11 +21,7 @@ const Getproducts = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-
-      const response = await axios.get(
-        "https://hope.alwaysdata.net/api/get_products"
-      );
-
+      const response = await axios.get("https://hope.alwaysdata.net/api/get_products");
       setProducts(response.data);
       setLoading(false);
     } catch (error) {
@@ -38,7 +34,7 @@ const Getproducts = () => {
     fetchProducts();
   }, []);
 
-  // ADD TO CART
+  // ADD TO CART LOGIC
   const addToCart = (product) => {
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -48,14 +44,10 @@ const Getproducts = () => {
     }
 
     const cartKey = `cart_${user.email}`;
-
     let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
     const productId = product.product_id || product.id;
 
-    const existingItem = cart.find(
-      (item) => item.product_id === productId
-    );
+    const existingItem = cart.find((item) => item.product_id === productId);
 
     if (existingItem) {
       existingItem.quantity += 1;
@@ -71,70 +63,78 @@ const Getproducts = () => {
     window.dispatchEvent(new Event("storage"));
   };
 
-  // FILTER PRODUCTS BASED ON SEARCH QUERY
+  // FILTER PRODUCTS
   const filteredProducts = products.filter((product) =>
     product.product_name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="row">
+    <div className="container-fluid px-4">
       <FloatingButtons />
       <Mycarousel />
       <SearchBar onSearch={setSearch} />
 
       {loading && <Loader />}
-      <h4 className="text-danger">{error}</h4>
+      {error && <h4 className="text-danger text-center mt-3">{error}</h4>}
 
-      {filteredProducts.map((product) => {
-        const productId = product.product_id || product.id;
+      <div className="row mt-4">
+        {filteredProducts.map((product) => {
+          const productId = product.product_id || product.id;
 
-        return (
-          <div
-            key={productId}
-            className="col-md-3 justify-content-center mb-3"
-          >
-            <div className="card">
-              <img
-                src={img_url + product.product_photo}
-                className="product_img mt-3"
-                alt={product.product_name}
-              />
+          return (
+            <div key={productId} className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex mb-4">
+              {/* .d-flex on the column and .flex-column on the card makes them equal height */}
+              <div className="card w-100 shadow-sm border-gold d-flex flex-column">
+                <div className="p-3 text-center">
+                  <img
+                    src={img_url + product.product_photo}
+                    className="product_img img-fluid"
+                    alt={product.product_name}
+                    style={{ maxHeight: "180px", objectFit: "contain" }}
+                  />
+                </div>
 
-              <div className="card-body">
-                <h5 className="card-title">
-                  {product.product_name}
-                </h5>
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title text-warning fw-bold">
+                    {product.product_name}
+                  </h5>
 
-                <p className="card-text">
-                  {product.product_description.slice(0, 100)}...
-                </p>
+                  <p className="card-text text-secondary small">
+                    {product.product_description.length > 80
+                      ? product.product_description.slice(0, 80) + "..."
+                      : product.product_description}
+                  </p>
 
-                <h4 className="price">
-                  Ksh {product.product_cost}
-                </h4>
+                  <h4 className="price mt-2 mb-3">
+                    Ksh {Number(product.product_cost).toLocaleString()}
+                  </h4>
 
-                <button
-                  className="btn btn-outline-warning ms-2"
-                  onClick={() => addToCart(product)}
-                >
-                  <i className="bi bi-cart"></i> Add to Cart
-                </button>
+                  {/* mt-auto pushes this entire div to the bottom of the card */}
+                  <div className="mt-auto d-flex flex-column gap-2">
+                    <button
+                      className="btn btn-outline-warning w-100 d-flex align-items-center justify-content-center"
+                      onClick={() => addToCart(product)}
+                    >
+                      <i className="bi bi-cart me-2"></i> Add to Cart
+                    </button>
 
-                <button
-                  className="btn btn-buy"
-                  onClick={() =>
-                    navigate("/makepayment", {
-                      state: { product },
-                    })
-                  }
-                >
-                  Purchase Now
-                </button>
+                    <button
+                      className="btn btn-buy w-100 fw-bold"
+                      onClick={() =>
+                        navigate("/makepayment", {
+                          state: { product },
+                        })
+                      }
+                    >
+                      Purchase Now
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

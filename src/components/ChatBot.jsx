@@ -79,6 +79,42 @@ const ChatBot = ({ darkMode }) => {
         response: "ZuriCrafters is a platform that connects talented artisans across Kenya with customers who appreciate handmade crafts. We offer a wide range of products including baskets, jewelry, and artwork, all crafted with love and care. Our mission is to empower local artisans and promote Kenyan culture through unique, high-quality crafts."
     },
     {
+        keywords: ["how to order", "place an order", "buy"],
+        response: "To place an order, simply browse our products on the home page, add your desired items to the cart, and proceed to checkout. If you have any questions during the process, feel free to ask me!"
+    },
+    {
+        keywords: ["return policy", "returns", "refunds"],
+        response: "We want you to be happy with your purchase. If you have any issues with your order, please contact our support team through the contact page and we will assist you with returns, refunds, or exchanges."
+    },
+    {
+      keywords: ["materials", "made of", "crafting"],
+      response: "Our crafts are made using a variety of materials including natural fibers, beads, and recycled materials. Each artisan uses traditional techniques to create unique and beautiful pieces."
+    },
+    {
+        keywords: ["shipping", "delivery time", "how long to deliver"],
+        response: "Delivery times vary based on your location. Typically, orders are processed within 1-2 business days and delivery can take anywhere from 3-7 business days depending on your area."
+    },
+    {
+        keywords: ["payment options", "how to pay", "payment methods"],
+        response: "We currently accept M-Pesa for payments. If you have any questions about the payment process, feel free to ask!" 
+    },
+    {
+        keywords: ["gift cards", "gift certificate", "gift"],
+        response: "We currently do not offer gift cards, but we have a wide range of handmade crafts that make perfect gifts for any occasion. If you need help finding the right gift, just ask!"
+    },
+    {
+        keywords: ["international shipping", "ship internationally", "deliver abroad"],
+        response: "At the moment, we only offer delivery within Kenya. However, we are working on expanding our shipping options in the future. Stay tuned for updates!"
+    },
+    {
+      keywords: ["kenyan culture", "kenya", "african crafts"],
+      response: "Our crafts are deeply rooted in Kenyan culture, showcasing the rich heritage and traditions of our artisans. Each piece tells a story and reflects the unique styles and techniques passed down through generations."
+    },  
+    {
+        keywords: ["location", "where are you based", "where do you operate"],
+        response: "We are based in Nairobi, Kenya, and we operate primarily within the country. However, we are working on expanding our reach to other regions in the future."
+    },
+    {
         keywords: ["artisans", "makers", "craftspeople"],
         response: "Our artisans are skilled craftspeople from various regions in Kenya, each bringing their unique style and cultural heritage to their work. They create beautiful handmade products such as baskets, jewelry, and artwork using traditional techniques passed down through generations."
     },

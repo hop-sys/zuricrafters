@@ -61,3 +61,22 @@ blockquote {
     grid-template-columns: 1fr;
   }
 }
+.dark-mode .story-container {
+  color: #ddd;
+}
+.dark-mode .subtitle {
+  color: #c9a66b;
+}
+.dark-mode .story-content {
+  color: #ddd;
+}
+.dark-mode blockquote {
+  color: #ccc;
+}
+.dark-mode .story-image-placeholder {
+  background: #555;
+}
+.dark-mode .craft-overlay {
+  background: #c9a66b;
+  color: #333;
+}
