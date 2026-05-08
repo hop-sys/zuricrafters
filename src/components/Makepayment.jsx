@@ -6,15 +6,9 @@ import '../css/Makepayment.css';
 
 const Makepayment = () => {
     const location = useLocation();
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
-const { product, total = 0 } = location.state || {};
-
-const items = product
-  ? Array.isArray(product)
-    ? product
-    : [product]
-  : [];
+    const { product, total = 0 } = location.state || {};
     const img_url = "https://hope.alwaysdata.net/static/images/";
 
     const [number, setNumber] = useState("");
@@ -22,9 +16,23 @@ const items = product
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
-    // Handle case where product might be undefined
+    // Brand Colors for inline consistency if needed
+    const zuriBrown = "#5C3D2E";
+    const zuriGold = "#FFB74D";
+
     if (!product) {
-        return <div className="container mt-5 text-center">Product data not found. <button onClick={() => navigate('/')}>Go Back</button></div>;
+        return (
+            <div className="container mt-5 text-center py-5">
+                <h4 style={{ color: zuriBrown }}>Product data not found.</h4>
+                <button 
+                    className="btn mt-3" 
+                    style={{ backgroundColor: zuriBrown, color: zuriGold }}
+                    onClick={() => navigate('/')}
+                >
+                    Go Back to Shop
+                </button>
+            </div>
+        );
     }
 
     const handlesubmit = async (e) => {
@@ -40,10 +48,7 @@ const items = product
             setLoading(false);
             setSuccess(response.data.message);
 
-            setTimeout(() => {
-                setSuccess("");
-            }, 3000);
-
+            setTimeout(() => setSuccess(""), 5000);
         } catch (error) {
             setLoading(false);
             setError(error.response?.data?.message || error.message);
@@ -54,9 +59,8 @@ const items = product
         <div className="payment-page-wrapper">
             <div className="container py-5">
                 <div className="row justify-content-center">
-                    <div className="col-lg-10 col-xl-8">
-                        {/* Main Card Container */}
-                        <div className="payment-card shadow-sm rounded-4 overflow-hidden border-0">
+                    <div className="col-lg-10 col-xl-9">
+                        <div className="payment-card shadow-lg rounded-4 overflow-hidden">
                             <div className="row g-0">
                                 
                                 {/* Left Side: Product Image */}
@@ -70,42 +74,45 @@ const items = product
                                     </div>
                                 </div>
 
-                                {/* Right Side: Payment Logic */}
-                                <div className="col-md-6 p-4 p-lg-5 d-flex flex-column bg-white">
-                                    {/* Top Navigation */}
+                                {/* Right Side: Payment Logic (Transparent for Dark Mode) */}
+                                <div className="col-md-6 p-4 p-lg-5 d-flex flex-column payment-form-section">
                                     <div className="d-flex justify-content-between align-items-center mb-4">
                                         <button 
-                                            className="btn btn-back" 
+                                            className="btn btn-zuri-outline" 
                                             onClick={() => navigate("/")}>
                                             ← Back
                                         </button>
-                                        <span className="badge-best-seller">Best Seller</span>
+                                        <span className="badge-zuri">Artisanal Heritage</span>
                                     </div>
 
-                                    {/* Product Details */}
                                     <h2 className="payment-title">{product.product_name}</h2>
-                                    <h5 className="payment-subtitle">Handcrafted Artisanal Piece</h5>
+                                    <h5 className="payment-subtitle">Authentic Kenyan Craft</h5>
                                     
                                     <p className="payment-desc my-3">
                                         {product.product_description}
                                     </p>
 
-                                    <h3 className="payment-price mb-4">
-                                        KES {Number(product.product_cost).toLocaleString()}
-                                    </h3>
+                                    <div className="price-tag-container mb-4">
+                                        <span className="price-label">Total Amount</span>
+                                        <h3 className="payment-price">
+                                            KES {Number(total || product.product_cost).toLocaleString()}
+                                        </h3>
+                                    </div>
 
-                                    {/* M-Pesa Form */}
                                     <form onSubmit={handlesubmit} className="mt-auto">
                                         {loading && <Loader />}
                                         
-                                        {success && <div className="text-success small mb-2 fw-bold">{success}</div>}
-                                        {error && <div className="text-danger small mb-2">{error}</div>}
+                                        {success && <div className="alert alert-zuri-success">{success}</div>}
+                                        {error && <div className="alert alert-zuri-error">{error}</div>}
 
                                         <div className="form-group mb-3">
+                                            <label className="small fw-bold mb-1" style={{ color: zuriBrown }}>
+                                                M-Pesa Number
+                                            </label>
                                             <input 
                                                 type="tel"
                                                 className='form-control mpesa-input'
-                                                placeholder='254XXXXXXXXX'
+                                                placeholder='2547XXXXXXXX'
                                                 required 
                                                 value={number}
                                                 onChange={(e) => setNumber(e.target.value)}
@@ -114,15 +121,14 @@ const items = product
 
                                         <button 
                                             type="submit" 
-                                            className='btn btn-mpesa w-100 py-2'>
-                                            Make Payment - KES {product.product_cost}
+                                            disabled={loading}
+                                            className='btn btn-zuri-primary w-100 py-3'>
+                                            {loading ? "Processing..." : "Complete Payment"}
                                         </button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        {/* Footer text from mockup */}
-                        <p className="text-center mt-4 small design-tag">Designed in Nairobi, Kenya</p>
                     </div>
                 </div>
             </div>

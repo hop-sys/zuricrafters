@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../css/Checkout.css";
 import FloatingButtons from "./FloatingButtons";
 
@@ -9,217 +8,229 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
-  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-
   const cartKey = user ? `cart_${user.email}` : null;
 
-  // LOAD CART
-  const loadCart = () => {
-    if (!user) return;
-    const savedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
-    setCart(savedCart);
-  };
+  // Colors
+  const zuriBrown = "#5C3D2E";
+  const zuriGold = "#FFB74D";
+  const zuriMuted = "#A68A7C";
 
+  // INITIAL LOAD
   useEffect(() => {
     if (!user) {
-      navigate("/signup");
+      window.location.href = "/signup";
       return;
     }
+    const savedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    setCart(savedCart);
+  }, [user, cartKey]);
 
-    loadCart();
-  }, []);
-
-  // SAVE CART
-  const saveCart = (updatedCart) => {
+  // HELPER: SYNC STATE & STORAGE
+  const updateCartPersistently = (updatedCart) => {
     localStorage.setItem(cartKey, JSON.stringify(updatedCart));
     setCart(updatedCart);
     window.dispatchEvent(new Event("storage"));
   };
 
-  // INCREASE
+  // HELPER: FULL CLEAR
+  const clearCartAndNotify = () => {
+    localStorage.removeItem(cartKey);
+    setCart([]);
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  // CART ACTIONS
   const increaseQty = (id) => {
     const updated = cart.map((item) =>
-      item.product_id === id
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
+      item.product_id === id ? { ...item, quantity: item.quantity + 1 } : item
     );
-    saveCart(updated);
+    updateCartPersistently(updated);
   };
 
-  // DECREASE
   const decreaseQty = (id) => {
-    let updated = cart.map((item) =>
-      item.product_id === id
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    );
-
-    updated = updated.filter((item) => item.quantity > 0);
-    saveCart(updated);
+    let updated = cart
+      .map((item) =>
+        item.product_id === id ? { ...item, quantity: item.quantity - 1 } : item
+      )
+      .filter((item) => item.quantity > 0);
+    updateCartPersistently(updated);
   };
 
-  // REMOVE
   const removeFromCart = (id) => {
     const updated = cart.filter((item) => item.product_id !== id);
-    saveCart(updated);
+    updateCartPersistently(updated);
   };
 
-  // TOTAL
   const total = cart.reduce(
     (sum, item) => sum + Number(item.product_cost) * item.quantity,
     0
   );
-  
-  // PAYMENT
+
+  // MPESA PAYMENT LOGIC
   const handlePayment = async () => {
-  if (!phone) {
-    setStatusMessage("Please enter your M-Pesa number"); // Set message instead of alert
-    return;
-  }
-
-  try {
-    setLoading(true);
-    setStatusMessage("Connecting to M-Pesa..."); // Give the user feedback immediately
-
-    const formData = new FormData();
-    formData.append("phone", phone);
-    formData.append("amount", total);
-
-    const response = await fetch(
-      "https://hope.alwaysdata.net/api/mpesa_payment",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    const data = await response.json();
-
-    if (data.message) {
-      setStatusMessage(data.message); // Show success message on screen
+    if (!phone) {
+      setStatusMessage("Please enter your M-Pesa number");
+      return;
     }
 
-    // Clear cart and reset phone
-    setCart([]);
-    localStorage.removeItem(cartKey);
-    setPhone("");
+    try {
+      setLoading(true);
+      setStatusMessage("Connecting to M-Pesa...");
 
-    // Optional: Clear the message after 6 seconds
-    setTimeout(() => setStatusMessage(""), 6000);
+      const formData = new FormData();
+      formData.append("phone", phone);
+      formData.append("amount", total);
 
-  } catch (error) {
-    console.error("Payment error:", error);
-    setStatusMessage("Payment failed. Please check your connection and try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+      const response = await fetch("https://hope.alwaysdata.net/api/mpesa_payment", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatusMessage(data.message || "Request sent! Check your phone.");
+        clearCartAndNotify();
+        setPhone("");
+      } else {
+        setStatusMessage(data.message || "Payment request failed.");
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      setStatusMessage("Connection error. Please try again.");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setStatusMessage(""), 6000);
+    }
+  };
+
   return (
     <div className="container mt-4">
-      <h2>🧾 Checkout</h2>
+      <h2 className="mb-4">🧾 Checkout</h2>
 
       {cart.length === 0 ? (
-        <h4>Your cart is empty 🛒</h4>
+        <div className="text-center py-5">
+          <h4>Your cart is empty 🛒</h4>
+          <button 
+            className="btn btn-outline-dark mt-3" 
+            onClick={() => window.location.href = '/'}
+            style={{ borderColor: zuriBrown, color: zuriBrown }}
+          >
+            Back to Shop
+          </button>
+        </div>
       ) : (
         <>
-          {cart.map((item) => (
-            <div key={item.product_id} className="col-md-12 mb-3">
-              <div className="card p-3 d-flex flex-row justify-content-between align-items-center">
-                {/* PRODUCT INFO */}
-                <div>
-                  <h5>{item.product_name}</h5>
-                  <p>KSh {item.product_cost}</p>
+          <div className="row">
+            {cart.map((item) => (
+              <div key={item.product_id} className="col-12 mb-3">
+                <div className="card p-3 shadow-sm d-flex flex-row justify-content-between align-items-center" 
+                     style={{ borderColor: zuriBrown, backgroundColor: "transparent" }}>
+                  <div>
+                    <h5 className="mb-1" style={{ color: zuriBrown }}>{item.product_name}</h5>
+                    <p className="text-muted mb-0">KSh {Number(item.product_cost).toLocaleString()}</p>
+                  </div>
+
+                  <div className="d-flex align-items-center gap-3">
+                    <div className="d-flex align-items-center border rounded" style={{ borderColor: zuriBrown }}>
+                      <button className="btn btn-sm px-3" onClick={() => decreaseQty(item.product_id)}>➖</button>
+                      <span className="fw-bold px-2">{item.quantity}</span>
+                      <button className="btn btn-sm px-3" onClick={() => increaseQty(item.product_id)}>➕</button>
+                    </div>
+
+                    <div className="text-end" style={{ minWidth: "100px" }}>
+                      <strong className="d-block" style={{ color: zuriBrown }}>
+                        KSh {(item.product_cost * item.quantity).toLocaleString()}
+                      </strong>
+                    </div>
+
+                    <button
+                      className="btn btn-sm"
+                      onClick={() => removeFromCart(item.product_id)}
+                      style={{
+                        backgroundColor: zuriBrown,
+                        color: zuriGold,
+                        fontWeight: "bold",
+                        transition: "0.3s"
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.backgroundColor = zuriGold;
+                        e.target.style.color = zuriBrown;
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.backgroundColor = zuriBrown;
+                        e.target.style.color = zuriGold;
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-
-                {/* QUANTITY */}
-                <div className="d-flex align-items-center gap-2">
-                  <button
-                    className="btn btn-sm btn-dark"
-                    onClick={() => decreaseQty(item.product_id)}
-                  >
-                    ➖
-                  </button>
-
-                  <span style={{ fontWeight: "bold" }}>
-                    {item.quantity}
-                  </span>
-
-                  <button
-                    className="btn btn-sm btn-dark"
-                    onClick={() => increaseQty(item.product_id)}
-                  >
-                    ➕
-                  </button>
-                </div>
-
-                {/* TOTAL */}
-                <div>
-                  <strong>
-                    KSh {item.product_cost * item.quantity}
-                  </strong>
-                </div>
-
-                {/* REMOVE */}
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => removeFromCart(item.product_id)}
-                >
-                  Remove
-                </button>
               </div>
-            </div>
-          ))}
-
-          {/* TOTAL */}
-          <div className="text-end mt-4">
-            <h3>Total: KSh {total.toFixed(2)}</h3>
+            ))}
           </div>
 
-          {/* PHONE INPUT */}
-          <div className="mt-3">
-            <label className="form-label">M-Pesa Phone Number</label>
+          <div className="text-end mt-4">
+            <h3 className="fw-bold">Total: KSh {total.toLocaleString()}</h3>
+          </div>
+
+          {/* PAYMENT BOX - DARK MODE FIXED */}
+          <div className="mt-4 p-4 border rounded shadow-sm" 
+               style={{ 
+                 backgroundColor: "rgba(92, 61, 46, 0.05)", // Very light brown tint
+                 borderColor: zuriBrown 
+               }}>
+            <label className="form-label fw-bold" style={{ color: zuriBrown }}>M-Pesa Phone Number</label>
             <input
               type="text"
-              className="form-control"
-              placeholder="e.g. 0712345678 or 254712345678"
+              className="form-control form-control-lg"
+              placeholder="e.g. 2547XXXXXXXX"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              style={{ borderColor: zuriBrown, backgroundColor: "transparent", color: "inherit" }}
             />
+            
+            {statusMessage && (
+              <div className="alert mt-3" style={{ 
+                backgroundColor: zuriGold, 
+                color: zuriBrown, 
+                border: `1px solid ${zuriBrown}`,
+                fontWeight: "bold",
+                textAlign: "center"
+              }}>
+                {statusMessage}
+              </div>
+            )}
+
+            <button
+              className="btn mt-3 w-100 py-3 fw-bold"
+              onClick={handlePayment}
+              disabled={loading || cart.length === 0}
+              style={{
+                backgroundColor: loading || cart.length === 0 ? zuriMuted : zuriBrown,
+                color: zuriGold,
+                border: `2px solid ${zuriBrown}`,
+                transition: "all 0.3s ease",
+                cursor: loading || cart.length === 0 ? "not-allowed" : "pointer"
+              }}
+              onMouseOver={(e) => {
+                if (!loading && cart.length > 0) {
+                  e.target.style.backgroundColor = zuriGold;
+                  e.target.style.color = zuriBrown;
+                }
+              }}
+              onMouseOut={(e) => {
+                if (!loading && cart.length > 0) {
+                  e.target.style.backgroundColor = zuriBrown;
+                  e.target.style.color = zuriGold;
+                }
+              }}
+            >
+              {loading ? "Processing..." : `Pay KSh ${total.toLocaleString()}`}
+            </button>
           </div>
 
-          {/* ON-SCREEN NOTIFICATION */}
-{statusMessage && (
-  <div className="alert mt-3" style={{ 
-      backgroundColor: "#FFB74D", // Savannah Gold
-      color: "#5C3D2E",           // Earthy Brown
-      border: "1px solid #5C3D2E",
-      fontWeight: "bold",
-      textAlign: "center"
-  }}>
-    {statusMessage}
-  </div>
-)}
-
-          {/* PAY BUTTON */}
-          <button
-            className="btn btn-success mt-3 w-100" // Added w-100 for a better mobile look
-            onClick={handlePayment}
-            disabled={loading || cart.length === 0}
-          >
-            {loading ? "Processing..." : "Pay Now (M-Pesa)"}
-          </button>
-
-          {/* PAY BUTTON */}
-          <button
-            className="btn btn-success mt-3"
-            onClick={handlePayment}
-            disabled={loading || cart.length === 0}
-          >
-            {loading ? "Processing..." : "Pay Now (M-Pesa)"}
-          </button>
-
-          {/* FLOATING BUTTONS */}
           <FloatingButtons />
         </>
       )}

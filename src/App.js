@@ -44,7 +44,7 @@ const toggleDarkMode = () => {
         <Route path='/signup' element={<Signup/>} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/addproducts' element={<Addproducts darkMode={darkMode}/>} />
-        <Route path='/makepayment' element={<Makepayment/>} />
+        <Route path='/makepayment' element={<Makepayment darkMode={darkMode}/>} />
         <Route path='*' element={<Notfound />}/>
         <Route path='/aboutus' element={<Aboutus />}/>
         <Route path='/ourstory' element={<OurStory />}/>

@@ -1,19 +1,23 @@
-/* Page Background */
+/* Container & Wrapper */
 .payment-page-wrapper {
-    background-color: #fdfaf7; /* Creamy background */
+    background-color: transparent; /* Allows your app's global dark/light theme to show */
     min-height: 100vh;
+    color: inherit;
 }
 
-/* The Card */
+/* The Adaptive Card */
 .payment-card {
-    background: #fff;
-    border-radius: 16px;
+    /* Uses brand brown with 8% opacity - looks good on any background */
+    background-color: rgba(92, 61, 46, 0.08); 
+    border: 1px solid #5C3D2E;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }
 
-/* Image Handling */
+/* Image section */
 .payment-image-container {
     height: 100%;
-    min-height: 400px;
+    min-height: 450px;
 }
 
 .payment-product-img {
@@ -22,75 +26,108 @@
     object-fit: cover;
 }
 
-/* Typography */
+/* Text Elements */
 .payment-title {
-    color: #4a3125; /* Deep brand brown */
-    font-weight: 700;
-    font-size: 1.75rem;
+    color: #5C3D2E; /* Earthy Brown */
+    font-weight: 800;
 }
 
 .payment-subtitle {
     color: #8b6e5e;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .payment-desc {
+    color: inherit;
+    opacity: 0.85;
     font-size: 0.95rem;
-    line-height: 1.6;
-    color: #555;
 }
 
 .payment-price {
-    color: #a67c52; /* Bronze gold color */
+    color: #FFB74D; /* Savannah Gold */
     font-weight: 700;
+    margin: 0;
 }
 
-/* Buttons and UI elements */
-.btn-back {
-    border: 1px solid #ddd;
-    color: #666;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    padding: 5px 15px;
-    background: #fff;
-}
-
-.badge-best-seller {
-    color: #8b6e5e;
+.price-label {
     font-size: 0.8rem;
-    font-weight: 500;
+    color: #5C3D2E;
+    font-weight: bold;
 }
 
+/* Form Styling (Dark Mode Fixes) */
 .mpesa-input {
-    border-radius: 8px;
-    padding: 12px;
-    border: 1px solid #e0e0e0;
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.1rem;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid #5C3D2E !important;
+    color: inherit !important;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: monospace;
+    font-size: 1.2rem;
 }
 
-.btn-mpesa {
-    background-color: #5c3d2e; /* The dark brown from your mockup */
-    color: #fff;
+.mpesa-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(92, 61, 46, 0.2);
+    border-color: #FFB74D !important;
+}
+
+/* Zuri Buttons */
+.btn-zuri-primary {
+    background-color: #5C3D2E;
+    color: #FFB74D;
     border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: background 0.3s ease;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.3s ease;
 }
 
-.btn-mpesa:hover {
-    background-color: #432c21;
-    color: #fff;
+.btn-zuri-primary:hover {
+    background-color: #FFB74D;
+    color: #5C3D2E;
+}
+
+.btn-zuri-outline {
+    border: 1px solid #5C3D2E;
+    color: #5C3D2E;
+    background: transparent;
+    font-size: 0.85rem;
+}
+
+.badge-zuri {
+    background-color: rgba(92, 61, 46, 0.1);
+    color: #5C3D2E;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border: 1px solid #5C3D2E;
+}
+
+/* Alerts */
+.alert-zuri-success {
+    background-color: #FFB74D;
+    color: #5C3D2E;
+    border: 1px solid #5C3D2E;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.alert-zuri-error {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    font-size: 0.85rem;
 }
 
 .design-tag {
     color: #8b6e5e;
-    letter-spacing: 0.5px;
+    font-style: italic;
+    opacity: 0.7;
 }
 
-/* Responsive tweaks */
+/* Responsive */
 @media (max-width: 768px) {
     .payment-image-container {
         min-height: 300px;

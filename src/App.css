@@ -245,7 +245,7 @@ body:has(.dark-mode) {
     border-bottom: 1px solid #D4A017;
 }
 
-.chat-bot-dark .chat-body {
+.chatbot-dark .chat-body {
     background-color: #2a2a2a !important;
     color: #000 !important;
 }
@@ -282,4 +282,9 @@ body:has(.dark-mode) {
 .chatbot-light {
     background-color: white;
     border: 1px solid #ccc;
+}
+.chatbot-light .chat-header {
+    background-color: #f5f5f5;
+    color: #333;
+    border-bottom: 1px solid #ccc;
 }
