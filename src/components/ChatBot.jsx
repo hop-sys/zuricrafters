@@ -43,6 +43,14 @@ const ChatBot = ({ darkMode }) => {
       response: "Hello 👋 Welcome to ZuriCrafters!"
     },
     {
+      keywords: ["who are you", "what is this", "about"],
+      response: "I’m ZuriBot, your friendly assistant here to help you with any questions about ZuriCrafters. I can provide information about our products, artisans, payment options, and more. Feel free to ask me anything!"
+    },
+    {
+      keywords: ["how to order", "place an order", "buy"],
+      response: "To place an order, simply browse our products on the home page, add your desired items to the cart, and proceed to checkout. If you have any questions during the process, feel free to ask me!"
+    },
+    {
       keywords: ["product", "sell", "items", "crafts", "what do you sell"],
       response: "We sell handmade crafts like baskets, jewelry, and artwork"
     },
@@ -101,6 +109,10 @@ const ChatBot = ({ darkMode }) => {
     {
         keywords: ["gift cards", "gift certificate", "gift"],
         response: "We currently do not offer gift cards, but we have a wide range of handmade crafts that make perfect gifts for any occasion. If you need help finding the right gift, just ask!"
+    },
+    {
+      keywords: ["volunteer", "help", "support"],
+      response: "We appreciate your interest in supporting our cause! You can help by spreading the word about ZuriCrafters, sharing our products on social media, or even volunteering your time to assist with events or marketing. Please contact us through the contact page if you're interested in getting involved!"
     },
     {
         keywords: ["international shipping", "ship internationally", "deliver abroad"],
