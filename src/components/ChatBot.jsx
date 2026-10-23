@@ -173,6 +173,10 @@ const ChatBot = ({ darkMode }) => {
     {
         keywords: ["gift", "present", "special occasion"],
         response: "Our crafts make wonderful gifts for special occasions! Whether you’re looking for a birthday present, anniversary gift, or something unique for a loved one, we have a variety of handmade items that would be perfect. Let me know if you need help finding the right gift!"
+    },
+    {
+        keywords: ["custom order", "personalized item", "bespoke product"],
+        response: "Yes! We offer custom orders. If you have a specific design or idea in mind, please contact us through the contact page and we will connect you with an artisan who can bring your vision to life."
     }
   ];
 
